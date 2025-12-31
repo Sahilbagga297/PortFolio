@@ -18,12 +18,17 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration
+import cors from "cors";
+
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://yourdomain.com'] 
-        : ['http://localhost:3000', 'http://localhost:5173'],
-    credentials: true
+  origin: [
+    "https://port-folio-num7.vercel.app",
+    "https://port-folio-num7-iii9s6jtj-sahil-baggas-projects.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
+
 
 // Rate limiting
 const limiter = rateLimit({
