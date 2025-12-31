@@ -13,8 +13,8 @@ const Work = () => {
       description: "A full stack interactive web application developed to ease the work of Medical Representatives in the process of dataset management.",
       technologies: ["React", "Node.js", "MongoDB", "Express", "ExcelJs"],
       image: pharmaImg,
-      github: "https://github.com/yourusername/ecommerce",
-      live: "https://your-ecommerce-app.com",
+      github: "https://github.com/Sahilbagga297/Pharma-Pulse",
+      live: "#",
       featured: true
     },
     {
@@ -23,8 +23,8 @@ const Work = () => {
       description: "A full stack web application developed for real time Air Quality monitoring and alert system when AQI reaches a threshold.",
       technologies: ["React", "MongoDB", "Nodejs", "Express", "IOT", "Socket.io" , "World-Air-Quality-Index API"],
       image: pollsenseimg,
-      github: "https://github.com/yourusername/task-manager",
-      live: "https://your-task-app.com",
+      github: "https://github.com/Sahilbagga297/Pollusense",
+      live: "#",
       featured: true
     },
     {
@@ -33,8 +33,8 @@ const Work = () => {
       description: "A full stack web application developed to help the retired Senior Citizens to easily claim their Pension",
       technologies: ["React", "Mongo Database", "FaceApi", "CSS3", "Geolocation"],
       image: nidhisetuimg,
-      github: "https://github.com/yourusername/weather-app",
-      live: "https://your-weather-app.com",
+      github: "https://github.com/Sahilbagga297/NidhiSetu",
+      live: "#",
       featured: false
     },
     {
@@ -43,8 +43,8 @@ const Work = () => {
       description: "A full stack web application developed with motive of showcasing my technical skills.",
       technologies: ["React", "Tailwind CSS", "Vite", "JavaScript"],
       image: portfolioimg,
-      github: "https://github.com/yourusername/portfolio",
-      live: "https://your-portfolio.com",
+      github: "https://github.com/Sahilbagga297/PortFolio",
+      live: "#",
       featured: false
     },
     {
@@ -53,8 +53,8 @@ const Work = () => {
       description: "A full stack E Commerce Website developed for the purpose of buying or Building wooden furniture.",
       technologies: ["React", "Nodejs", "MongoDB", "Express", "JavaScript"],
       image: Buildbazarimg,
-      github: "https://github.com/yourusername/portfolio",
-      live: "https://your-build-bazar-x.com",
+      github: "https://github.com/Sahilbagga297/BuildBazaarX",
+      live: "#",
       featured: false
     }
   ];
