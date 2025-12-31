@@ -18,8 +18,6 @@ const app = express();
 app.use(helmet());
 
 // CORS configuration
-import cors from "cors";
-
 app.use(cors({
   origin: [
     "https://port-folio-num7.vercel.app",
