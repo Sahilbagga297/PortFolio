@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Mail, Github, Linkedin, ExternalLink, Code, Palette, Zap, Coffee, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Sahil_Bagga_image from "../../assets/img.jpg"
+const Sahil_Bagga_image = "/profile.jpg";
 const Home = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
