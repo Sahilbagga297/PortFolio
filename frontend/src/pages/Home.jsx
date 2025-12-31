@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Mail, Github, Linkedin, ExternalLink, Code, Palette, Zap, Coffee, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import Sahil_Bagga_image from "../../assets/img.jpg"
 const Home = () => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
@@ -250,7 +250,7 @@ const Home = () => {
                         <div className="w-full h-full bg-gradient-to-br from-amber-100/50 to-orange-100/50 flex items-center justify-center">
                           <div className="text-center">
                             <div className="w-100 h-100 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-2xl border-4 border-white/30 overflow-hidden">
-                              <img src="/src/assets/img.jpg" alt="Sahil Bagga" className="w-full h-full object-cover rounded-full" />
+                              <img src={Sahil_Bagga_image} alt="Sahil Bagga" className="w-full h-full object-cover" />
                             </div>
                            
                             <p className="text-amber-600 text-6xl font-semibold">Sahil Bagga</p>
