@@ -14,7 +14,7 @@ const Work = () => {
       technologies: ["React", "Node.js", "MongoDB", "Express", "ExcelJs"],
       image: pharmaImg,
       github: "https://github.com/Sahilbagga297/Pharma-Pulse",
-      live: "#",
+      live: "https://pharma-pulse-lur3.vercel.app/",
       featured: true
     },
     {
@@ -44,7 +44,7 @@ const Work = () => {
       technologies: ["React", "Tailwind CSS", "Vite", "JavaScript"],
       image: portfolioimg,
       github: "https://github.com/Sahilbagga297/PortFolio",
-      live: "#",
+      live: "https://port-folio-num7.vercel.app/",
       featured: false
     },
     {
