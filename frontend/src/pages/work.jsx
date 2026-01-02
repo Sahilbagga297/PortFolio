@@ -34,7 +34,7 @@ const Work = () => {
       technologies: ["React", "Mongo Database", "FaceApi", "CSS3", "Geolocation"],
       image: nidhisetuimg,
       github: "https://github.com/Sahilbagga297/NidhiSetu",
-      live: "#",
+      live: "https://nidhi-setu-two.vercel.app/",
       featured: false
     },
     {
@@ -54,7 +54,7 @@ const Work = () => {
       technologies: ["React", "Nodejs", "MongoDB", "Express", "JavaScript"],
       image: Buildbazarimg,
       github: "https://github.com/Sahilbagga297/BuildBazaarX",
-      live: "#",
+      live: "https://build-bazaar-x.vercel.app/",
       featured: false
     }
   ];
