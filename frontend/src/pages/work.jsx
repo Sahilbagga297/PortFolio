@@ -64,12 +64,12 @@ const Work = () => {
       {/* Header Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
-        <div className="relative z-10 px-6 py-16">
+        <div className="relative z-10 px-6 py-12 md:py-16">
           <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6">
               My <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Work</span>
             </h1>
-            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto">
               Explore my latest projects and creative solutions. Each project represents a unique challenge
               and showcases my skills in modern web development.
             </p>
@@ -78,11 +78,11 @@ const Work = () => {
       </div>
 
       {/* Projects Grid */}
-      <div className="px-6 py-16">
+      <div className="px-6 py-12 md:py-16">
         <div className="max-w-7xl mx-auto">
           {/* Featured Projects */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center">
               <Star className="w-8 h-8 text-amber-500 mr-3" />
               Featured Projects
             </h2>
@@ -139,7 +139,7 @@ const Work = () => {
 
           {/* All Projects */}
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-8 flex items-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center">
               <Code className="w-8 h-8 text-orange-500 mr-3" />
               All Projects
             </h2>
@@ -202,9 +202,9 @@ const Work = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="px-6 py-16 bg-gradient-to-r from-amber-500 to-orange-500">
+      <div className="px-6 py-12 md:py-16 bg-gradient-to-r from-amber-500 to-orange-500">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Start a Project?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Start a Project?</h2>
           <p className="text-amber-100 mb-8 text-lg">
             Let's work together to bring your ideas to life with cutting-edge technology and creative solutions.
           </p>
