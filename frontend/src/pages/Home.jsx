@@ -244,7 +244,7 @@ const Home = () => {
                   <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full blur-xl opacity-60 animate-bounce"></div>
                   <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-gradient-to-r from-orange-300 to-red-300 rounded-full blur-xl opacity-40 animate-pulse"></div>
 
-                  <div className="relative bg-gradient-to-br from-white/90 to-amber-50/90 backdrop-blur-xl rounded-3xl p-8 border-2 border-amber-200/50 shadow-2xl shadow-amber-200/20">
+                  <div className="relative bg-gradient-to-br from-white/90 to-amber-50/90 backdrop-blur-xl rounded-3xl p-8 border-2 border-amber-200/50 shadow-2xl shadow-amber-200/20 mx-auto mt-10 lg:mt-0">
                     <div className="aspect-square bg-gradient-to-br from-amber-400 via-orange-400 to-red-400 rounded-3xl p-2 shadow-xl">
                       <div className="w-full h-full bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl flex items-center justify-center overflow-hidden border-4 border-white/50">
                         <div className="w-full h-full bg-gradient-to-br from-amber-100/50 to-orange-100/50 flex items-center justify-center">
