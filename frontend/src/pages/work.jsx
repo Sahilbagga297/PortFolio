@@ -88,7 +88,7 @@ const Work = () => {
             </h2>
             <div className="grid lg:grid-cols-2 gap-8">
               {projects.filter(project => project.featured).map((project) => (
-                <div key={project.id} className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-amber-100">
+                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-amber-100">
                   <div className="relative h-64 overflow-hidden">
                     <div
                       className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-500"
@@ -103,6 +103,7 @@ const Work = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors duration-300 flex items-center gap-2"
                           >
                             <Github className="w-4 h-4" />
@@ -112,6 +113,7 @@ const Work = () => {
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300 flex items-center gap-2"
                           >
                             <ExternalLink className="w-4 h-4" />
@@ -145,7 +147,7 @@ const Work = () => {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project) => (
-                <div key={project.id} className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-orange-100">
+                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-orange-100">
                   <div className="relative h-48 overflow-hidden">
                     <div
                       className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-500"
@@ -160,6 +162,7 @@ const Work = () => {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded text-sm hover:bg-white/30 transition-colors duration-300 flex items-center gap-1"
                           >
                             <Github className="w-3 h-3" />
@@ -169,6 +172,7 @@ const Work = () => {
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600 transition-colors duration-300 flex items-center gap-1"
                           >
                             <ExternalLink className="w-3 h-3" />
