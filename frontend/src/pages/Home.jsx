@@ -249,11 +249,11 @@ const Home = () => {
                       <div className="w-full h-full bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl flex items-center justify-center overflow-hidden border-4 border-white/50">
                         <div className="w-full h-full bg-gradient-to-br from-amber-100/50 to-orange-100/50 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="w-100 h-100 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-2xl border-4 border-white/30 overflow-hidden">
+                            <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-2xl border-4 border-white/30 overflow-hidden">
                               <img src={Sahil_Bagga_image} alt="Sahil Bagga" className="w-full h-full object-cover" />
                             </div>
 
-                            <p className="text-amber-600 text-6xl font-semibold">Sahil Bagga</p>
+                            <p className="text-amber-600 text-3xl sm:text-4xl md:text-6xl font-semibold">Sahil Bagga</p>
                           </div>
                         </div>
                       </div>
@@ -285,7 +285,7 @@ const Home = () => {
             <div className={`bg-gradient-to-r from-white/90 to-amber-50/90 backdrop-blur-xl border-2 border-amber-200/50 rounded-3xl p-10 shadow-2xl shadow-amber-200/20 transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
               <div className="flex flex-col lg:flex-row items-center justify-between space-y-8 lg:space-y-0">
                 <div className="text-center lg:text-left">
-                  <h3 className="text-4xl font-bold bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent mb-4">
+                  <h3 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent mb-4">
                     Let's create something amazing together
                   </h3>
                   <p className="text-xl text-amber-700 max-w-2xl">
@@ -295,7 +295,7 @@ const Home = () => {
                 <div className="flex justify-center">
                   <button
                     onClick={() => navigate('/Contact')}
-                    className="group bg-white/80 border-2 border-amber-300 text-amber-800 hover:text-orange-700 hover:border-orange-400 px-8 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center space-x-3 ml-40n"
+                    className="group bg-white/80 border-2 border-amber-300 text-amber-800 hover:text-orange-700 hover:border-orange-400 px-8 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center space-x-3"
                   >
                     <Coffee className="w-6 h-6" />
                     <span>Schedule a Call</span>
