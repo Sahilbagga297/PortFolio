@@ -5,43 +5,43 @@ const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        phonenumber:'',
+        phonenumber: '',
         gender: ''
     });
-    
+
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validateForm = () => {
         const newErrors = {};
-        
+
         if (!formData.username.trim()) {
             newErrors.username = 'Full name is required';
         }
-        
+
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = 'Invalid email format';
         }
-        
+
         if (!formData.phonenumber.trim()) {
             newErrors.phonenumber = 'Phone number is required';
         } else if (!/^[\+]?[1-9][\d]{0,15}$/.test(formData.phonenumber.replace(/\s/g, ''))) {
             newErrors.phonenumber = 'Invalid phone number format';
         }
-        
+
         if (!formData.gender) {
             newErrors.gender = 'Gender is required';
         }
-        
+
         return newErrors;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const validationErrors = validateForm();
-        
+
         if (Object.keys(validationErrors).length === 0) {
             setIsSubmitting(true);
             try {
@@ -52,9 +52,9 @@ const RegistrationForm = () => {
                     },
                     body: JSON.stringify(formData)
                 });
-                
+
                 const result = await response.json();
-                
+
                 if (result.success) {
                     alert('Contact form submitted successfully! Thank you for reaching out.');
                     setFormData({
@@ -84,7 +84,7 @@ const RegistrationForm = () => {
             ...prev,
             [name]: value
         }));
-        
+
         // Clear error when user starts typing
         if (errors[name]) {
             setErrors(prev => ({
@@ -98,13 +98,13 @@ const RegistrationForm = () => {
         <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
             {/* Animated Gradient Background - Same as About Page */}
             <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 animate-pulse"></div>
-            <div className="absolute inset-0 bg-gradient-to-tl from-amber-100/30 via-transparent to-orange-100/30 animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/50 via-amber-50/50 to-orange-50/50 animate-pulse" style={{animationDelay: '2s'}}></div>
-            
+            <div className="absolute inset-0 bg-gradient-to-tl from-amber-100/30 via-transparent to-orange-100/30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/50 via-amber-50/50 to-orange-50/50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
             {/* Registration Form Container */}
             <div className="relative z-10 w-full max-w-lg">
                 <div className="absolute inset-0 bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
-                <div className="relative p-8 sm:p-12">
+                <div className="relative p-6 sm:p-12">
                     {/* Header */}
                     <div className="text-center mb-8">
                         <div className="w-16 h-16 bg-gradient-to-br from-amber-600 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -134,9 +134,8 @@ const RegistrationForm = () => {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${
-                                        errors.username ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
-                                    }`}
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.username ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                        }`}
                                     placeholder="Enter your full name"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -170,9 +169,8 @@ const RegistrationForm = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${
-                                        errors.email ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
-                                    }`}
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                        }`}
                                     placeholder="Enter your email address"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -206,9 +204,8 @@ const RegistrationForm = () => {
                                     name="phonenumber"
                                     value={formData.phonenumber}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${
-                                        errors.phonenumber ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
-                                    }`}
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.phonenumber ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                        }`}
                                     placeholder="Enter your phone number"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -240,9 +237,8 @@ const RegistrationForm = () => {
                                     name="gender"
                                     value={formData.gender}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 appearance-none ${
-                                        errors.gender ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
-                                    }`}
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 appearance-none ${errors.gender ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                        }`}
                                 >
                                     <option value="">Select your gender</option>
                                     <option value="male">Male</option>
@@ -275,9 +271,8 @@ const RegistrationForm = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-4 px-6 rounded-xl hover:from-amber-700 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-amber-200 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center ${
-                                isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                            }`}
+                            className={`w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-4 px-6 rounded-xl hover:from-amber-700 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-amber-200 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                                }`}
                         >
                             {isSubmitting ? (
                                 <>

@@ -8,7 +8,7 @@ const About = () => {
     link.href = '/resume.pdf';
     link.download = 'Sahil_Bagga_Resume.pdf';
     link.target = '_blank';
-    
+
     // Append to body, click, and remove
     document.body.appendChild(link);
     link.click();
@@ -19,9 +19,9 @@ const About = () => {
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 animate-pulse"></div>
-      <div className="absolute inset-0 bg-gradient-to-tl from-amber-100/30 via-transparent to-orange-100/30 animate-pulse" style={{animationDelay: '1s'}}></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/50 via-amber-50/50 to-orange-50/50 animate-pulse" style={{animationDelay: '2s'}}></div>
-      
+      <div className="absolute inset-0 bg-gradient-to-tl from-amber-100/30 via-transparent to-orange-100/30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/50 via-amber-50/50 to-orange-50/50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
       <div className="relative z-10 p-4 sm:p-8 lg:p-12 font-sans">
         {/* Container for the entire about page content */}
         <div className="max-w-6xl mx-auto">
@@ -36,7 +36,7 @@ const About = () => {
           {/* About Me Section: Detailed Bio */}
           <section className="mb-16 relative">
             <div className="absolute inset-0 bg-white/60 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
-            <div className="relative p-8 sm:p-12">
+            <div className="relative p-6 sm:p-12">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-orange-600 rounded-xl flex items-center justify-center mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ const About = () => {
                 </div>
                 <h2 className="text-4xl font-bold text-amber-800">My Journey & Passion</h2>
               </div>
-              
+
               <div className="space-y-6 text-lg leading-relaxed text-gray-700">
                 <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-amber-700 first-letter:mr-2 first-letter:float-left first-letter:leading-none">
                   Hello! I'm Sahil Bagga, a passionate web developer
@@ -74,7 +74,7 @@ const About = () => {
           {/* Skills Section */}
           <section className="mb-16 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-100/80 to-orange-100/80 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
-            <div className="relative p-8 sm:p-12">
+            <div className="relative p-6 sm:p-12">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-orange-600 to-yellow-600 rounded-xl flex items-center justify-center mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +83,7 @@ const About = () => {
                 </div>
                 <h2 className="text-4xl font-bold text-orange-800">Skills & Expertise</h2>
               </div>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Technical Skills */}
                 <div className="space-y-6">
@@ -144,7 +144,7 @@ const About = () => {
           {/* Experience & Education Section */}
           <section className="mb-16 relative">
             <div className="absolute inset-0 bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
-            <div className="relative p-8 sm:p-12">
+            <div className="relative p-6 sm:p-12">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-yellow-600 to-amber-600 rounded-xl flex items-center justify-center mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,7 +153,7 @@ const About = () => {
                 </div>
                 <h2 className="text-4xl font-bold text-yellow-800">Experience & Education</h2>
               </div>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Experience */}
                 <div>
@@ -220,7 +220,7 @@ const About = () => {
           {/* Personal Touch Section */}
           <section className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/80 to-amber-100/80 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
-            <div className="relative p-8 sm:p-12">
+            <div className="relative p-6 sm:p-12">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-yellow-600 rounded-xl flex items-center justify-center mr-4">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,7 +229,7 @@ const About = () => {
                 </div>
                 <h2 className="text-4xl font-bold text-amber-800">Beyond the Code</h2>
               </div>
-              
+
               <div className="space-y-6 text-lg leading-relaxed text-gray-700">
                 <p>
                   When I'm not immersed in lines of code, you can often find me [mention a hobby, e.g., hiking
@@ -246,7 +246,7 @@ const About = () => {
             </div>
           </section>
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

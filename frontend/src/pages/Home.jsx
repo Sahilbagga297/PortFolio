@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -45,7 +45,7 @@ const Home = () => {
     link.href = '/resume.pdf';
     link.download = 'Sahil_Bagga_Resume.pdf';
     link.target = '_blank';
-    
+
     // Append to body, click, and remove
     document.body.appendChild(link);
     link.click();
@@ -57,7 +57,7 @@ const Home = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Large flowing shapes */}
-        <div 
+        <div
           className="absolute w-[800px] h-[800px] bg-gradient-to-r from-amber-200/30 to-orange-300/20 rounded-full blur-3xl transition-all duration-[3000ms] ease-out animate-pulse"
           style={{
             transform: `translate(${mousePosition.x * 0.03}px, ${mousePosition.y * 0.03 + scrollY * 0.1}px) rotate(${mousePosition.x * 0.01}deg)`,
@@ -65,7 +65,7 @@ const Home = () => {
             left: '-10%'
           }}
         />
-        <div 
+        <div
           className="absolute w-[600px] h-[600px] bg-gradient-to-r from-yellow-300/25 to-amber-400/15 rounded-full blur-3xl transition-all duration-[2000ms] ease-out"
           style={{
             transform: `translate(${mousePosition.x * -0.02}px, ${mousePosition.y * -0.02 - scrollY * 0.05}px) rotate(${mousePosition.x * -0.01}deg)`,
@@ -73,7 +73,7 @@ const Home = () => {
             right: '-5%'
           }}
         />
-        <div 
+        <div
           className="absolute w-[400px] h-[400px] bg-gradient-to-r from-orange-200/20 to-red-200/15 rounded-full blur-2xl transition-all duration-[2500ms] ease-out"
           style={{
             transform: `translate(${mousePosition.x * 0.015}px, ${mousePosition.y * 0.015}px)`,
@@ -89,30 +89,30 @@ const Home = () => {
           <defs>
             <pattern id="organic-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
               <circle cx="20" cy="20" r="2" fill="#D97706" opacity="0.3">
-                <animate attributeName="r" values="1;3;1" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="1;3;1" dur="4s" repeatCount="indefinite" />
               </circle>
               <circle cx="70" cy="40" r="1.5" fill="#F59E0B" opacity="0.4">
-                <animate attributeName="r" values="0.5;2.5;0.5" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="0.5;2.5;0.5" dur="3s" repeatCount="indefinite" />
               </circle>
               <circle cx="40" cy="80" r="1" fill="#92400E" opacity="0.5">
-                <animate attributeName="r" values="0.5;2;0.5" dur="5s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="0.5;2;0.5" dur="5s" repeatCount="indefinite" />
               </circle>
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#organic-pattern)"/>
+          <rect width="100%" height="100%" fill="url(#organic-pattern)" />
         </svg>
       </div>
 
       <div className="relative z-10">
         {/* Enhanced Navigation */}
 
-                               {/* Enhanced Main Content */}
-                   <div className="px-6 py-16">
+        {/* Enhanced Main Content */}
+        <div className="px-6 py-16">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-20 items-center">
-              
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
               {/* Left Column - Enhanced Text Content */}
-              <div className="space-y-10">
+              <div className="space-y-8 lg:space-y-10">
                 {/* Greeting Badge */}
                 <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200 rounded-full px-4 py-2 shadow-lg">
@@ -122,7 +122,7 @@ const Home = () => {
                 </div>
 
                 <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <h1 className="text-6xl lg:text-8xl font-extrabold leading-tight">
+                  <h1 className="text-4xl md:text-6xl lg:text-8xl font-extrabold leading-tight">
                     <span className="text-amber-900">Hi, I'm</span>
                     <br />
                     <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent relative">
@@ -134,15 +134,15 @@ const Home = () => {
 
                 <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <div className="space-y-4">
-                    <p className="text-2xl lg:text-3xl font-light text-amber-800 leading-relaxed">
+                    <p className="text-xl md:text-2xl lg:text-3xl font-light text-amber-800 leading-relaxed">
                       Mern-stack Developer passionate about creating{' '}
                       <span className="font-semibold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent relative">
                         visually appealing and user-friendly websites.
                       </span>
                     </p>
                     <p className="text-lg text-amber-700 leading-relaxed max-w-xl font-medium">
-                      I specialize in building scalable web applications with modern technologies. 
-                      Although i am a Fresher, I transform complex problems into elegant, 
+                      I specialize in building scalable web applications with modern technologies.
+                      Although i am a Fresher, I transform complex problems into elegant,
                       user-friendly solutions that drive business growth and user satisfaction.
                     </p>
                   </div>
@@ -157,7 +157,7 @@ const Home = () => {
                     </h3>
                     <div className="space-y-3">
                       {skills.map((skill, index) => (
-                        <div 
+                        <div
                           key={index}
                           className="group bg-white/70 backdrop-blur-sm border border-amber-200/60 rounded-2xl p-4 hover:bg-white/90 hover:border-orange-300/60 transition-all duration-300 shadow-lg hover:shadow-xl"
                         >
@@ -199,15 +199,15 @@ const Home = () => {
 
                 {/* Enhanced Call to Actions */}
                 <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-1000 delay-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <button 
+                  <button
                     onClick={() => navigate('/Work')}
                     className="group bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40"
                   >
                     <span>View My Work</span>
                     <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                   </button>
-                  
-                  <button 
+
+                  <button
                     onClick={handleDownloadResume}
                     className="group bg-white/80 backdrop-blur-sm border-2 border-amber-300/60 hover:border-orange-400/80 text-amber-800 hover:text-orange-700 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/95 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl"
                   >
@@ -216,25 +216,25 @@ const Home = () => {
                   </button>
                 </div>
 
-                                 {/* Enhanced Social Links */}
-                 <div className={`flex space-x-8 transition-all duration-1000 delay-900 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                   {[
-                     { icon: <Github className="w-7 h-7" />, label: "GitHub", color: "hover:bg-gray-100", url: "https://github.com/Sahilbagga297" },
-                     { icon: <Linkedin className="w-7 h-7" />, label: "LinkedIn", color: "hover:bg-blue-100", url: "https://www.linkedin.com/in/sahil-bagga-22327b295/" },
-                     { icon: <Mail className="w-7 h-7" />, label: "Email", color: "hover:bg-red-100", url: "mailto:sahilbagga297@gmail.com" }
-                   ].map((social, index) => (
-                     <a 
-                       key={index}
-                       href={social.url}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className={`bg-white/70 backdrop-blur-sm border border-amber-200/60 p-4 rounded-2xl text-amber-700 hover:text-amber-900 transition-all duration-300 hover:scale-110 transform shadow-lg hover:shadow-xl ${social.color}`}
-                       aria-label={social.label}
-                     >
-                       {social.icon}
-                     </a>
-                   ))}
-                 </div>
+                {/* Enhanced Social Links */}
+                <div className={`flex space-x-8 transition-all duration-1000 delay-900 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  {[
+                    { icon: <Github className="w-7 h-7" />, label: "GitHub", color: "hover:bg-gray-100", url: "https://github.com/Sahilbagga297" },
+                    { icon: <Linkedin className="w-7 h-7" />, label: "LinkedIn", color: "hover:bg-blue-100", url: "https://www.linkedin.com/in/sahil-bagga-22327b295/" },
+                    { icon: <Mail className="w-7 h-7" />, label: "Email", color: "hover:bg-red-100", url: "mailto:sahilbagga297@gmail.com" }
+                  ].map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`bg-white/70 backdrop-blur-sm border border-amber-200/60 p-4 rounded-2xl text-amber-700 hover:text-amber-900 transition-all duration-300 hover:scale-110 transform shadow-lg hover:shadow-xl ${social.color}`}
+                      aria-label={social.label}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
               </div>
 
               {/* Right Column - Enhanced Profile Section */}
@@ -243,7 +243,7 @@ const Home = () => {
                   {/* Floating decorative elements */}
                   <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full blur-xl opacity-60 animate-bounce"></div>
                   <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-gradient-to-r from-orange-300 to-red-300 rounded-full blur-xl opacity-40 animate-pulse"></div>
-                  
+
                   <div className="relative bg-gradient-to-br from-white/90 to-amber-50/90 backdrop-blur-xl rounded-3xl p-8 border-2 border-amber-200/50 shadow-2xl shadow-amber-200/20">
                     <div className="aspect-square bg-gradient-to-br from-amber-400 via-orange-400 to-red-400 rounded-3xl p-2 shadow-xl">
                       <div className="w-full h-full bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl flex items-center justify-center overflow-hidden border-4 border-white/50">
@@ -252,13 +252,13 @@ const Home = () => {
                             <div className="w-100 h-100 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-2xl border-4 border-white/30 overflow-hidden">
                               <img src={Sahil_Bagga_image} alt="Sahil Bagga" className="w-full h-full object-cover" />
                             </div>
-                           
+
                             <p className="text-amber-600 text-6xl font-semibold">Sahil Bagga</p>
                           </div>
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Enhanced Floating Elements */}
                     <div className="absolute -top-6 -right-6 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-xl border-2 border-white/30 animate-bounce">
                       <div className="flex items-center space-x-2">
@@ -292,15 +292,15 @@ const Home = () => {
                     Ready to bring your next project to life? I'm here to help you build exceptional digital experiences.
                   </p>
                 </div>
-                                 <div className="flex justify-center">
-                   <button 
-                     onClick={() => navigate('/Contact')}
-                     className="group bg-white/80 border-2 border-amber-300 text-amber-800 hover:text-orange-700 hover:border-orange-400 px-8 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center space-x-3 ml-40n"
-                   >
-                     <Coffee className="w-6 h-6" />
-                     <span>Schedule a Call</span>
-                   </button>
-                 </div>
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => navigate('/Contact')}
+                    className="group bg-white/80 border-2 border-amber-300 text-amber-800 hover:text-orange-700 hover:border-orange-400 px-8 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center space-x-3 ml-40n"
+                  >
+                    <Coffee className="w-6 h-6" />
+                    <span>Schedule a Call</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

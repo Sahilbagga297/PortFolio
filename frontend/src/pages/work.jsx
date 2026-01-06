@@ -21,7 +21,7 @@ const Work = () => {
       id: 2,
       title: "Pollusense",
       description: "A full stack web application developed for real time Air Quality monitoring and alert system when AQI reaches a threshold.",
-      technologies: ["React", "MongoDB", "Nodejs", "Express", "IOT", "Socket.io" , "World-Air-Quality-Index API"],
+      technologies: ["React", "MongoDB", "Nodejs", "Express", "IOT", "Socket.io", "World-Air-Quality-Index API"],
       image: pollsenseimg,
       github: "https://github.com/Sahilbagga297/Pollusense",
       live: "#",
@@ -66,11 +66,11 @@ const Work = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
         <div className="relative z-10 px-6 py-16">
           <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6">
               My <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Work</span>
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Explore my latest projects and creative solutions. Each project represents a unique challenge 
+            <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto">
+              Explore my latest projects and creative solutions. Each project represents a unique challenge
               and showcases my skills in modern web development.
             </p>
           </div>
@@ -99,18 +99,18 @@ const Work = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                       <div className="p-6 w-full">
                         <div className="flex gap-3">
-                          <a 
-                            href={project.github} 
-                            target="_blank" 
+                          <a
+                            href={project.github}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors duration-300 flex items-center gap-2"
                           >
                             <Github className="w-4 h-4" />
                             Code
                           </a>
-                          <a 
-                            href={project.live} 
-                            target="_blank" 
+                          <a
+                            href={project.live}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300 flex items-center gap-2"
                           >
@@ -156,18 +156,18 @@ const Work = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                       <div className="p-4 w-full">
                         <div className="flex gap-2">
-                          <a 
-                            href={project.github} 
-                            target="_blank" 
+                          <a
+                            href={project.github}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded text-sm hover:bg-white/30 transition-colors duration-300 flex items-center gap-1"
                           >
                             <Github className="w-3 h-3" />
                             Code
                           </a>
-                          <a 
-                            href={project.live} 
-                            target="_blank" 
+                          <a
+                            href={project.live}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600 transition-colors duration-300 flex items-center gap-1"
                           >
