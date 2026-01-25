@@ -70,8 +70,10 @@ const Work = () => {
               My <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Work</span>
             </h1>
             <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto">
-              Explore my latest projects and creative solutions. Each project represents a unique challenge
-              and showcases my skills in modern web development.
+              A collection of my recent projects showcasing problem-solving skills and modern web development practices.
+            </p>  
+            <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto">
+              (Please note: Backend responses may be slow due to free-tier hosting on Render. )
             </p>
           </div>
         </div>

@@ -42,8 +42,8 @@ const Home = () => {
   const handleDownloadResume = () => {
     // Create a link element
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Sahil_Bagga_Resume.pdf';
+    link.href = '/SahilBagga_Resumepwc.pdf';
+    link.download = 'SahilBagga_Resumepwc.pdf';
     link.target = '_blank';
 
     // Append to body, click, and remove
