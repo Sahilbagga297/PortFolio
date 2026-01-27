@@ -6,7 +6,7 @@ const RegistrationForm = () => {
         username: '',
         email: '',
         phonenumber: '',
-        gender: ''
+        message: ''
     });
 
     const [errors, setErrors] = useState({});
@@ -31,8 +31,8 @@ const RegistrationForm = () => {
             newErrors.phonenumber = 'Invalid phone number format';
         }
 
-        if (!formData.gender) {
-            newErrors.gender = 'Gender is required';
+        if (!formData.message.trim()) {
+            newErrors.message = 'Message is required';
         }
 
         return newErrors;
@@ -61,7 +61,7 @@ const RegistrationForm = () => {
                         username: '',
                         email: '',
                         phonenumber: '',
-                        gender: ''
+                        message: ''
                     });
                     setErrors({});
                 } else {
@@ -224,45 +224,36 @@ const RegistrationForm = () => {
                             )}
                         </div>
 
-                        {/* Gender Field */}
+                        {/* Message Field - Replaced Gender */}
                         <div className="relative">
                             <label className="block text-amber-800 font-semibold mb-2 flex items-center">
                                 <svg className="w-4 h-4 mr-2 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zM8 6a2 2 0 114 0v1H8V6zm0 3a1 1 0 012 0v3a1 1 0 11-2 0V9z" clipRule="evenodd" />
+                                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                                 </svg>
-                                Gender
+                                Your Message
                             </label>
                             <div className="relative">
-                                <select
-                                    name="gender"
-                                    value={formData.gender}
+                                <textarea
+                                    name="message"
+                                    value={formData.message}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 appearance-none ${errors.gender ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                    rows="4"
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 resize-none ${errors.message ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
                                         }`}
-                                >
-                                    <option value="">Select your gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="prefer-not-to-say">Prefer not to say</option>
-                                </select>
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    placeholder="Share your query or message here..."
+                                />
+                                <div className="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
                                     <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zM8 6a2 2 0 114 0v1H8V6zm0 3a1 1 0 012 0v3a1 1 0 11-2 0V9z" clipRule="evenodd" />
-                                    </svg>
-                                </div>
-                                <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
                                     </svg>
                                 </div>
                             </div>
-                            {errors.gender && (
+                            {errors.message && (
                                 <p className="text-red-500 text-sm mt-2 flex items-center">
                                     <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                     </svg>
-                                    {errors.gender}
+                                    {errors.message}
                                 </p>
                             )}
                         </div>
