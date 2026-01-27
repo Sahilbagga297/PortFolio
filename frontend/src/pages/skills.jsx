@@ -113,8 +113,8 @@ const SkillsPage = () => {
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
                   className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center ${activeCategory === category.id
-                      ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg'
-                      : 'bg-white/60 backdrop-blur-sm text-amber-700 hover:bg-white/80'
+                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg'
+                    : 'bg-white/60 backdrop-blur-sm text-amber-700 hover:bg-white/80'
                     }`}
                 >
                   <span className="mr-2">{category.icon}</span>

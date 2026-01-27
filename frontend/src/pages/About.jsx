@@ -5,8 +5,8 @@ const About = () => {
   const handleDownloadResume = () => {
     // Create a link element
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Sahil_Bagga_Resume.pdf';
+    link.href = '/SahilBagga_Resumepwc.pdf';
+    link.download = 'SahilBagga_Resumepwc.pdf';
     link.target = '_blank';
 
     // Append to body, click, and remove
@@ -48,24 +48,27 @@ const About = () => {
 
               <div className="space-y-6 text-lg leading-relaxed text-gray-700">
                 <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-amber-700 first-letter:mr-2 first-letter:float-left first-letter:leading-none">
-                  Hello! I'm Sahil Bagga, a passionate web developer
-                  with a deep-seated love for creating innovative and impactful digital solutions. My journey
-                  into the world of technology began, and since then, it's been an exhilarating ride of continuous
-                  learning and building.
+                  Hello! I’m Sahil Bagga, a passionate Full Stack Web Developer with a strong interest in building scalable, user-friendly, and performance-driven web applications. 
+                  I actively explore new technologies and enjoy applying them to real-world projects to 
+                  strengthen my practical understanding of modern software development.
                 </p>
                 <p>
-                  What truly drives me is the challenge of transforming complex problems into elegant,
-                  user-friendly applications. I thrive on the process of designing robust architectures,
-                  writing clean and efficient code, and seeing ideas come to life. My experiences have
-                  equipped me with a strong foundation in [mention key areas, e.g., web development,
-                  data analysis, software engineering principles], and I'm always eager to explore new
-                  technologies and methodologies.
+                  I have hands-on experience with the MERN stack (MongoDB, Express.js, React.js, Node.js) and
+                  specialize in developing responsive frontends using React and building secure, efficient
+                  backend APIs with Node.js and Express. I focus on writing clean, maintainable code and
+                  designing applications that offer a seamless user experience.
+
+                  I also have a growing foundation in Cloud Computing
+                  and DevOps practices, including application deployment, version control, and containerization using Docker and Kubernetes. 
+                  I have also worked with cloud platforms such as AWS , Google Cloud and MongoDb Atlas. I have also used deployment tools such as GitHub Actions and Render to host
+                  full-stack applications, manage builds, and streamline development workflows.
                 </p>
                 <p>
-                  Outside of coding, I'm deeply invested in [mention a passion, e.g., contributing to open-source projects,
-                  mentoring aspiring developers, exploring new design patterns]. I believe in the power of
-                  collaboration and continuous improvement, always striving to deliver high-quality work
-                  that makes a real difference.
+                  As a fresher, I have gained valuable exposure through freelance projects,
+                  personal projects, and collaborative team work, where I built complete web
+                  applications from scratch and solved real-world problems for clients.
+                  These experiences have helped me develop strong problem-solving skills,
+                  adaptability, and a continuous learning mindset.
                 </p>
               </div>
             </div>
@@ -97,12 +100,12 @@ const About = () => {
                   </h3>
                   <div className="space-y-4">
                     {[
-                      { category: "Programming Languages", skills: "JavaScript (ES6+), Python, Java, C++, Go" },
-                      { category: "Frontend Frameworks", skills: "React, Vue.js, Angular, Next.js" },
-                      { category: "Backend Frameworks", skills: "Node.js (Express), Django, Flask, Spring Boot" },
-                      { category: "Databases", skills: "MongoDB, PostgreSQL, MySQL, Firebase Firestore" },
-                      { category: "Tools & Technologies", skills: "Git, Docker, AWS, Azure, Google Cloud, REST APIs, GraphQL" },
-                      { category: "UI/UX Design", skills: "Figma, Adobe XD (basic proficiency)" }
+                      { category: "Programming Languages", skills: "JavaScript, Python, Java, C++, TypeScript, C" },
+                      { category: "Frontend Frameworks", skills: "React, Next.js, Bootstrap, Tailwind CSS" },
+                      { category: "Backend Frameworks", skills: "Node.js (Express), NestJS" },
+                      { category: "Databases", skills: "MongoDB, MySQL, Firebase" },
+                      { category: "Tools & Technologies", skills: "Git, GitHub, Docker, AWS, Google Cloud, MongoDb Atlas, Render, Vercel, Generative AI, OpenAI" },
+                      { category: "UI/UX Design", skills: "Figma" }
                     ].map((item, index) => (
                       <div key={index} className="bg-white/50 rounded-xl p-4 hover:bg-white/70 transition-all duration-300 hover:shadow-lg">
                         <div className="font-semibold text-amber-800 mb-2">{item.category}</div>
@@ -124,11 +127,11 @@ const About = () => {
                   </h3>
                   <div className="space-y-4">
                     {[
-                      { skill: "Communication", desc: "Excellent verbal and written communication, clear articulation of ideas." },
-                      { skill: "Teamwork", desc: "Proven ability to collaborate effectively in agile environments." },
-                      { skill: "Problem-Solving", desc: "Strong analytical skills, adept at identifying and resolving complex issues." },
+                      { skill: "Communication", desc: "Good verbal and written communication in Languages like English and Hindi" },
+                      { skill: "Teamwork", desc: "Proven ability to collaborate effectively in agile environments by participating in hackathons and group projects." },
+                      { skill: "Problem-Solving", desc: "Good analytical skills, and resolving complex issues." },
                       { skill: "Adaptability", desc: "Quick learner, comfortable with new technologies and changing requirements." },
-                      { skill: "Leadership", desc: "Experience leading small teams and mentoring junior developers." }
+                      { skill: "Leadership", desc: "Experience leading small teams and colaborating with other teams." }
                     ].map((item, index) => (
                       <div key={index} className="bg-white/50 rounded-xl p-4 hover:bg-white/70 transition-all duration-300 hover:shadow-lg">
                         <div className="font-semibold text-orange-800 mb-2">{item.skill}</div>
@@ -167,18 +170,17 @@ const About = () => {
                   </h3>
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border-l-4 border-amber-500 hover:shadow-lg transition-all duration-300">
-                      <div className="font-bold text-amber-800 text-lg mb-2">Software Engineer</div>
-                      <div className="text-orange-600 font-medium mb-3">Tech Solutions Inc. | Jan 2022 - Present</div>
+                      <div className="font-bold text-amber-800 text-lg mb-2">Internship</div>
+                      <div className="text-orange-600 font-medium mb-3">T.C.E Education | June 2025 - August 2025</div>
                       <p className="text-gray-700">
-                        Developed and maintained scalable web applications using React and Node.js.
-                        Implemented new features, optimized performance, and collaborated with cross-functional teams.
+                        I did my Internship in M.E.R.N stack development at T.C.E Education,Saket Nagar, Kanpur. 
                       </p>
                     </div>
                     <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-6 border-l-4 border-yellow-500 hover:shadow-lg transition-all duration-300">
-                      <div className="font-bold text-yellow-800 text-lg mb-2">Junior Developer Intern</div>
-                      <div className="text-amber-600 font-medium mb-3">Innovate Corp. | May 2021 - Aug 2021</div>
+                      <div className="font-bold text-yellow-800 text-lg mb-2">Backend Developer</div>
+                      <div className="text-amber-600 font-medium mb-3">VyapGo  | May 2025 - October 2025</div>
                       <p className="text-gray-700">
-                        Assisted in frontend development, created reusable UI components, and participated in code reviews.
+                        I served as a Backend Developer at a Hyderabad based Startup named Vyapgo aiming to provide a smart solution for payment and inventry management for small scale business. 
                       </p>
                     </div>
                   </div>
@@ -195,10 +197,18 @@ const About = () => {
                     Education
                   </h3>
                   <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300">
-                    <div className="font-bold text-orange-800 text-lg mb-2">Bachelor of Technology in Computer Science</div>
-                    <div className="text-yellow-600 font-medium mb-3">University of Excellence | 2018 - 2022</div>
+                    <div className="font-bold text-orange-800 text-lg mb-2">Intermediate of Science (10+2)</div>
+                    <div className="text-yellow-600 font-medium mb-3">Sir Padampat Singhania Education Center | 2021 - 2023</div>
                     <p className="text-gray-700">
-                      Graduated with honors. Focused on software engineering, algorithms, and data structures.
+                    Completed Intermediate of Science (10+2) from Sir Padampat Singhania Education Center, Kanpur. 
+                    </p>
+                  </div>
+                  <br />
+                  <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-6 border-l-4 border-orange-500 hover:shadow-lg transition-all duration-300">
+                    <div className="font-bold text-orange-800 text-lg mb-2">Bachelor of Technology in Information Technology</div>
+                    <div className="text-yellow-600 font-medium mb-3">Jaipur Engineering College and Research Center | 2023 - 2027</div>
+                    <p className="text-gray-700">
+                      Currently pursuing my Bachelor of Technology in Information Technology from Jaipur Engineering College and Research Center, Jaipur. 
                     </p>
                   </div>
                 </div>
@@ -232,15 +242,13 @@ const About = () => {
 
               <div className="space-y-6 text-lg leading-relaxed text-gray-700">
                 <p>
-                  When I'm not immersed in lines of code, you can often find me [mention a hobby, e.g., hiking
-                  in the mountains, experimenting with new recipes in the kitchen, playing competitive board games].
-                  I believe that a well-rounded life fuels creativity and problem-solving, and these activities
-                  help me stay refreshed and inspired.
+                  When I'm not immersed in lines of code, you can often find me enjoying swiming in the nearest swimming pool or playing badminton with my friends.
+                  I believe these activities fuels my creativity and problem-solving which help me stay refreshed and inspired.
                 </p>
                 <p>
-                  I'm also a keen [mention another interest, e.g., photographer, avid reader of sci-fi novels,
-                  volunteer at local tech meetups]. These pursuits not only offer a great way to unwind but also
-                  provide fresh perspectives that often translate back into my professional work.
+                  I’m also a keen reader and a big fan of sci-fi movies and web series. 
+                  Exploring imaginative stories helps me unwind while giving me new perspectives 
+                  and ideas that often inspire my learning and approach to development.
                 </p>
               </div>
             </div>

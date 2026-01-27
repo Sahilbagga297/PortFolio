@@ -24,7 +24,7 @@ const Work = () => {
       technologies: ["React", "MongoDB", "Nodejs", "Express", "IOT", "Socket.io", "World-Air-Quality-Index API"],
       image: pollsenseimg,
       github: "https://github.com/Sahilbagga297/Pollusense",
-      live: "#",
+      live: "https://pollusense.vercel.app/",
       featured: true
     },
     {

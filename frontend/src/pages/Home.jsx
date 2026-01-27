@@ -115,10 +115,6 @@ const Home = () => {
               <div className="space-y-8 lg:space-y-10">
                 {/* Greeting Badge */}
                 <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 border border-amber-200 rounded-full px-4 py-2 shadow-lg">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-amber-800 font-medium text-sm">Available for new opportunities</span>
-                  </div>
                 </div>
 
                 <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
@@ -260,18 +256,6 @@ const Home = () => {
                     </div>
 
                     {/* Enhanced Floating Elements */}
-                    <div className="absolute -top-6 -right-6 bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-xl border-2 border-white/30 animate-bounce">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
-                        <span>Available for hire</span>
-                      </div>
-                    </div>
-                    <div className="absolute -bottom-6 -left-6 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-xl border-2 border-white/30">
-                      <div className="flex items-center space-x-2">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span>Fresher</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
