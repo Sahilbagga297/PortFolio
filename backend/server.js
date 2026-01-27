@@ -21,7 +21,8 @@ app.use(helmet());
 app.use(cors({
   origin: [
     "https://port-folio-num7.vercel.app",
-    "https://port-folio-num7-iii9s6jtj-sahil-baggas-projects.vercel.app"
+    "https://port-folio-num7-iii9s6jtj-sahil-baggas-projects.vercel.app",
+    "http://localhost:5173"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true

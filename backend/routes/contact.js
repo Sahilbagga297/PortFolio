@@ -5,10 +5,10 @@ const router = express.Router();
 // POST /api/contact - Submit contact form
 router.post('/', async (req, res) => {
     try {
-        const { username, email, phonenumber, gender } = req.body;
+        const { username, email, phonenumber, message } = req.body;
 
         // Basic validation
-        if (!username || !email || !phonenumber || !gender) {
+        if (!username || !email || !phonenumber || !message) {
             return res.status(400).json({
                 success: false,
                 message: 'All fields are required'
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
             username,
             email,
             phonenumber,
-            gender
+            message
         });
 
         await newContact.save();
@@ -42,14 +42,14 @@ router.post('/', async (req, res) => {
                 username: newContact.username,
                 email: newContact.email,
                 phonenumber: newContact.phonenumber,
-                gender: newContact.gender,
+                message: newContact.message,
                 createdAt: newContact.createdAt
             }
         });
 
     } catch (error) {
         console.error('Contact submission error:', error);
-        
+
         // Handle validation errors
         if (error.name === 'ValidationError') {
             const validationErrors = Object.values(error.errors).map(err => err.message);
@@ -93,7 +93,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const contact = await Contact.findById(req.params.id).select('-__v');
-        
+
         if (!contact) {
             return res.status(404).json({
                 success: false,

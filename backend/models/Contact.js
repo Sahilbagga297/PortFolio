@@ -20,13 +20,11 @@ const contactSchema = new mongoose.Schema({
         trim: true,
         match: [/^[\+]?[1-9][\d]{0,15}$/, 'Please enter a valid phone number']
     },
-    gender: {
+    message: {
         type: String,
-        required: [true, 'Gender is required'],
-        enum: {
-            values: ['male', 'female', 'other', 'prefer-not-to-say'],
-            message: 'Please select a valid gender option'
-        }
+        required: [true, 'Message is required'],
+        trim: true,
+        maxlength: [2000, 'Message cannot be more than 2000 characters']
     }
 }, {
     timestamps: true
