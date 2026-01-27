@@ -28,9 +28,9 @@ const Home = () => {
   }, []);
 
   const skills = [
-    { icon: <Code className="w-6 h-6" />, label: "Mern Stack Development", level: "Advanced" },
-    { icon: <Palette className="w-6 h-6" />, label: "UI/UX Design", level: "Advanced" },
-    { icon: <Zap className="w-6 h-6" />, label: "AI Agents", level: "Beginner" },
+    { icon: <Code className="w-6 h-6" />, label: "Mern Stack Development", level: "Advanced", stars: 5 },
+    { icon: <Palette className="w-6 h-6" />, label: "Generative AI", level: "Intermediate", stars: 4 },
+    { icon: <Zap className="w-6 h-6" />, label: "Cloud Computing", level: "Beginner", stars: 3 },
   ];
 
   const achievements = [
@@ -169,7 +169,7 @@ const Home = () => {
                             </div>
                             <div className="flex items-center space-x-1">
                               {[...Array(5)].map((_, i) => (
-                                <Star key={i} className={`w-4 h-4 ${i < 4 ? 'text-orange-400 fill-current' : 'text-orange-200'}`} />
+                                <Star key={i} className={`w-4 h-4 ${i < skill.stars ? 'text-orange-400 fill-current' : 'text-orange-200'}`} />
                               ))}
                             </div>
                           </div>
