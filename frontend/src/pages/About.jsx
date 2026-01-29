@@ -3,13 +3,10 @@ import { Download } from 'lucide-react';
 
 const About = () => {
   const handleDownloadResume = () => {
-    // Create a link element
     const link = document.createElement('a');
     link.href = '/SahilBagga_Resumepwc.pdf';
     link.download = 'SahilBagga_Resumepwc.pdf';
     link.target = '_blank';
-
-    // Append to body, click, and remove
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -17,243 +14,155 @@ const About = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Gradient Background */}
+      <div className="relative z-10 px-4 py-8 sm:px-8 lg:px-12 font-sans">
+        <div className="max-w-6xl mx-auto space-y-20">
 
-
-      <div className="relative z-10 p-4 sm:p-8 lg:p-12 font-sans">
-        {/* Container for the entire about page content */}
-        <div className="max-w-6xl mx-auto">
-          {/* Header with animated title */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-6 tracking-tight">
+          {/* Header */}
+          <header className="text-center space-y-6">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
               About Me
             </h1>
-            <div className="w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full"></div>
-          </div>
+            <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full" />
+          </header>
 
-          {/* About Me Section: Detailed Bio */}
-          <section className="mb-16 relative">
-            <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
-            <div className="relative p-6 sm:p-12">
-              <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                <h2 className="text-4xl font-bold text-gray-200">My Journey & Passion</h2>
+          {/* About Section */}
+          <Section title="My Journey & Passion">
+            <div className="space-y-5 text-base sm:text-lg text-gray-400 leading-relaxed">
+              <p className="first-letter:text-2xl first-letter:font-bold first-letter:text-white first-letter:mr-1">
+                Hi, I’m Sahil Bagga, a Full Stack Web Developer passionate about building scalable,
+                user-friendly, and high-performance web applications.
+              </p>
+              <p>
+                I work extensively with the MERN stack, creating responsive React frontends and
+                secure backend APIs using Node.js and Express.
+              </p>
+              <p>
+                I also have foundational experience in Cloud Computing and DevOps, deploying
+                full-stack apps using AWS, Docker, Kubernetes, MongoDB Atlas, and CI/CD tools.
+              </p>
+            </div>
+          </Section>
+
+          {/* Skills */}
+          <Section title="Skills & Expertise">
+            <div className="space-y-10">
+              {/* Technical */}
+              <SkillGroup
+                title="Technical Skills"
+                items={[
+                  ["Programming Languages", "JavaScript, Python, Java, C++, TypeScript, C"],
+                  ["Frontend", "React, Next.js, Tailwind CSS, Bootstrap"],
+                  ["Backend", "Node.js, Express, Supabase"],
+                  ["Databases", "MongoDB, MySQL, Firebase"],
+                  ["Tools", "Git, Docker, AWS, GCP, Render, Vercel, OpenAI"],
+                  ["UI/UX", "Figma"],
+                ]}
+              />
+
+              {/* Soft Skills */}
+              <SkillGroup
+                title="Soft Skills"
+                items={[
+                  ["Communication", "Fluent in English & Hindi language"],
+                  ["Teamwork", "Hackathons and collaborative projects"],
+                  ["Problem Solving", "Strong analytical thinking"],
+                  ["Adaptability", "Fast learner, tech-enthusiast"],
+                  ["Leadership", "Led small teams & cross-team collaboration"],
+                ]}
+              />
+            </div>
+          </Section>
+
+          {/* Experience & Education */}
+          <Section title="Experience & Education">
+            <div className="space-y-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:space-y-0">
+              {/* Experience */}
+              <div className="space-y-6">
+                <Card
+                  title="MERN Stack Intern"
+                  subtitle="T.C.E Education | Jun 2025 – Aug 2025"
+                  text="Worked on full-stack MERN applications and backend APIs."
+                />
+                <Card
+                  title="Backend Developer"
+                  subtitle="VyapGo | May 2025 – Oct 2025"
+                  text="Built scalable backend systems for payment and inventory management."
+                />
               </div>
 
-              <div className="space-y-6 text-lg leading-relaxed text-gray-400">
-                <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-white first-letter:mr-2 first-letter:float-left first-letter:leading-none">
-                  Hello! I’m Sahil Bagga, a passionate Full Stack Web Developer with a strong interest in building scalable, user-friendly, and performance-driven web applications.
-                  I actively explore new technologies and enjoy applying them to real-world projects to
-                  strengthen my practical understanding of modern software development.
-                </p>
-                <p>
-                  I have hands-on experience with the MERN stack (MongoDB, Express.js, React.js, Node.js) and
-                  specialize in developing responsive frontends using React and building secure, efficient
-                  backend APIs with Node.js and Express. I focus on writing clean, maintainable code and
-                  designing applications that offer a seamless user experience.
-
-                  I also have a growing foundation in Cloud Computing
-                  and DevOps practices, including application deployment, version control, and containerization using Docker and Kubernetes.
-                  I have also worked with cloud platforms such as AWS , Google Cloud and MongoDb Atlas. I have also used deployment tools such as GitHub Actions and Render to host
-                  full-stack applications, manage builds, and streamline development workflows.
-                </p>
-                <p>
-                  As a fresher, I have gained valuable exposure through freelance projects,
-                  personal projects, and collaborative team work, where I built complete web
-                  applications from scratch and solved real-world problems for clients.
-                  These experiences have helped me develop strong problem-solving skills,
-                  adaptability, and a continuous learning mindset.
-                </p>
+              {/* Education */}
+              <div className="space-y-6">
+                <Card
+                  title="Intermediate (10+2)"
+                  subtitle="Sir Padampat Singhania Education Centre | 2021 – 2023"
+                  text="Intermediate of Science (PCM)"
+                />
+                <Card
+                  title="B.Tech – Information Technology"
+                  subtitle="Jaipur Engineering College and Research Centre | 2023 – 2027"
+                  text="Bachelor of Technology in Information Technology."
+                />
               </div>
             </div>
-          </section>
 
-          {/* Skills Section */}
-          <section className="mb-16 relative">
-            <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
-            <div className="relative p-6 sm:p-12">
-              <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <h2 className="text-4xl font-bold text-gray-200">Skills & Expertise</h2>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Technical Skills */}
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-gray-300 mb-6 flex items-center">
-                    <div className="w-8 h-8 bg-gray-700 rounded-lg mr-3 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
-                      </svg>
-                    </div>
-                    Technical Skills
-                  </h3>
-                  <div className="space-y-4">
-                    {[
-                      { category: "Programming Languages", skills: "JavaScript, Python, Java, C++, TypeScript, C" },
-                      { category: "Frontend Frameworks", skills: "React, Next.js, Bootstrap, Tailwind CSS" },
-                      { category: "Backend Frameworks", skills: "Node.js (Express), NestJS" },
-                      { category: "Databases", skills: "MongoDB, MySQL, Firebase" },
-                      { category: "Tools & Technologies", skills: "Git, GitHub, Docker, AWS, Google Cloud, MongoDb Atlas, Render, Vercel, Generative AI, OpenAI" },
-                      { category: "UI/UX Design", skills: "Figma" }
-                    ].map((item, index) => (
-                      <div key={index} className="bg-gray-800/50 rounded-xl p-4 hover:bg-gray-700/50 transition-all duration-300 hover:shadow-lg border border-gray-700/30">
-                        <div className="font-semibold text-gray-200 mb-2">{item.category}</div>
-                        <div className="text-gray-400">{item.skills}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Soft Skills */}
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-gray-300 mb-6 flex items-center">
-                    <div className="w-8 h-8 bg-gray-700 rounded-lg mr-3 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    Soft Skills
-                  </h3>
-                  <div className="space-y-4">
-                    {[
-                      { skill: "Communication", desc: "Good verbal and written communication in Languages like English and Hindi" },
-                      { skill: "Teamwork", desc: "Proven ability to collaborate effectively in agile environments by participating in hackathons and group projects." },
-                      { skill: "Problem-Solving", desc: "Good analytical skills, and resolving complex issues." },
-                      { skill: "Adaptability", desc: "Quick learner, comfortable with new technologies and changing requirements." },
-                      { skill: "Leadership", desc: "Experience leading small teams and colaborating with other teams." }
-                    ].map((item, index) => (
-                      <div key={index} className="bg-gray-800/50 rounded-xl p-4 hover:bg-gray-700/50 transition-all duration-300 hover:shadow-lg border border-gray-700/30">
-                        <div className="font-semibold text-gray-200 mb-2">{item.skill}</div>
-                        <div className="text-gray-400">{item.desc}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+            {/* Resume */}
+            <div className="pt-12 text-center">
+              <button
+                onClick={handleDownloadResume}
+                className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-600 text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black transition-all"
+              >
+                <Download className="w-6 h-6" />
+                Download Resume
+              </button>
             </div>
-          </section>
+          </Section>
 
-          {/* Experience & Education Section */}
-          <section className="mb-16 relative">
-            <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
-            <div className="relative p-6 sm:p-12">
-              <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 6V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2z" />
-                  </svg>
-                </div>
-                <h2 className="text-4xl font-bold text-gray-200">Experience & Education</h2>
-              </div>
+          {/* Personal */}
+          <Section title="Beyond the Code">
+            <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
+              When I’m not coding, I enjoy swimming and badminton. I’m also a sci-fi reader and
+              binge-watcher — creative stories often spark new technical ideas.
+            </p>
+          </Section>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Experience */}
-                <div>
-                  <h3 className="text-2xl font-semibold text-gray-300 mb-6 flex items-center">
-                    <div className="w-8 h-8 bg-gray-700 rounded-lg mr-3 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    Work Experience
-                  </h3>
-                  <div className="space-y-6">
-                    <div className="bg-gray-800/50 rounded-xl p-6 border-l-4 border-gray-500 hover:shadow-lg transition-all duration-300">
-                      <div className="font-bold text-gray-200 text-lg mb-2">Internship</div>
-                      <div className="text-gray-400 font-medium mb-3">T.C.E Education | June 2025 - August 2025</div>
-                      <p className="text-gray-400">
-                        I did my Internship in M.E.R.N stack development at T.C.E Education,Saket Nagar, Kanpur.
-                      </p>
-                    </div>
-                    <div className="bg-gray-800/50 rounded-xl p-6 border-l-4 border-gray-500 hover:shadow-lg transition-all duration-300">
-                      <div className="font-bold text-gray-200 text-lg mb-2">Backend Developer</div>
-                      <div className="text-gray-400 font-medium mb-3">VyapGo  | May 2025 - October 2025</div>
-                      <p className="text-gray-400">
-                        I served as a Backend Developer at a Hyderabad based Startup named Vyapgo aiming to provide a smart solution for payment and inventry management for small scale business.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Education */}
-                <div>
-                  <h3 className="text-2xl font-semibold text-gray-300 mb-6 flex items-center">
-                    <div className="w-8 h-8 bg-gray-700 rounded-lg mr-3 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                      </svg>
-                    </div>
-                    Education
-                  </h3>
-                  <div className="bg-gray-800/50 rounded-xl p-6 border-l-4 border-gray-500 hover:shadow-lg transition-all duration-300">
-                    <div className="font-bold text-gray-200 text-lg mb-2">Intermediate of Science (10+2)</div>
-                    <div className="text-gray-400 font-medium mb-3">Sir Padampat Singhania Education Center | 2021 - 2023</div>
-                    <p className="text-gray-400">
-                      Completed Intermediate of Science (10+2) from Sir Padampat Singhania Education Center, Kanpur.
-                    </p>
-                  </div>
-                  <br />
-                  <div className="bg-gray-800/50 rounded-xl p-6 border-l-4 border-gray-500 hover:shadow-lg transition-all duration-300">
-                    <div className="font-bold text-gray-200 text-lg mb-2">Bachelor of Technology in Information Technology</div>
-                    <div className="text-gray-400 font-medium mb-3">Jaipur Engineering College and Research Center | 2023 - 2027</div>
-                    <p className="text-gray-400">
-                      Currently pursuing my Bachelor of Technology in Information Technology from Jaipur Engineering College and Research Center, Jaipur.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Downloadable Resume */}
-              <div className="mt-12 text-center">
-                <button
-                  onClick={handleDownloadResume}
-                  className="group inline-flex items-center px-8 py-4 border-2 border-gray-600 text-lg font-semibold rounded-2xl text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black focus:outline-none focus:ring-4 focus:ring-gray-600/50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  <Download className="w-6 h-6 mr-3 group-hover:animate-bounce" />
-                  Download Resume
-                </button>
-              </div>
-            </div>
-          </section>
-
-          {/* Personal Touch Section */}
-          <section className="relative">
-            <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
-            <div className="relative p-6 sm:p-12">
-              <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                </div>
-                <h2 className="text-4xl font-bold text-gray-200">Beyond the Code</h2>
-              </div>
-
-              <div className="space-y-6 text-lg leading-relaxed text-gray-400">
-                <p>
-                  When I'm not immersed in lines of code, you can often find me enjoying swiming in the nearest swimming pool or playing badminton with my friends.
-                  I believe these activities fuels my creativity and problem-solving which help me stay refreshed and inspired.
-                </p>
-                <p>
-                  I’m also a keen reader and a big fan of sci-fi movies and web series.
-                  Exploring imaginative stories helps me unwind while giving me new perspectives
-                  and ideas that often inspire my learning and approach to development.
-                </p>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </div>
   );
 };
+
+/* ---------- Reusable Components ---------- */
+
+const Section = ({ title, children }) => (
+  <section className="relative">
+    <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
+    <div className="relative p-6 sm:p-10 space-y-8">
+      <h2 className="text-3xl sm:text-4xl font-bold text-gray-200">{title}</h2>
+      {children}
+    </div>
+  </section>
+);
+
+const SkillGroup = ({ title, items }) => (
+  <div>
+    <h3 className="text-xl sm:text-2xl font-semibold text-gray-300 mb-4">{title}</h3>
+    <div className="space-y-3">
+      {items.map(([k, v], i) => (
+        <div key={i} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/30">
+          <div className="font-semibold text-gray-200">{k}</div>
+          <div className="text-gray-400">{v}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const Card = ({ title, subtitle, text }) => (
+  <div className="bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500">
+    <h4 className="font-bold text-gray-200 text-lg">{title}</h4>
+    <p className="text-gray-400 text-sm mt-1">{subtitle}</p>
+    <p className="text-gray-400 mt-3">{text}</p>
+  </div>
+);
+
 export default About;
