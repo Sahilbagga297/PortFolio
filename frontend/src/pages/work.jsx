@@ -60,19 +60,19 @@ const Work = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+    <div className="relative">
       {/* Header Section */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-200/30 to-orange-300/20 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-500/10 to-gray-400/5 rounded-full blur-3xl"></div>
         <div className="relative z-10 px-6 py-12 md:py-16">
           <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6">
-              My <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">Work</span>
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6">
+              My <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">Work</span>
             </h1>
-            <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto">
               A collection of my recent projects showcasing problem-solving skills and modern web development practices.
-            </p>  
-            <p className="text-base sm:text-xl text-slate-600 max-w-3xl mx-auto">
+            </p>
+            <p className="text-base sm:text-xl text-gray-500 max-w-3xl mx-auto">
               (Please note: Backend responses may be slow due to free-tier hosting on Render. )
             </p>
           </div>
@@ -84,13 +84,13 @@ const Work = () => {
         <div className="max-w-7xl mx-auto">
           {/* Featured Projects */}
           <div className="mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center">
-              <Star className="w-8 h-8 text-amber-500 mr-3" />
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+              <Star className="w-8 h-8 text-gray-400 mr-3" />
               Featured Projects
             </h2>
             <div className="grid lg:grid-cols-2 gap-8">
               {projects.filter(project => project.featured).map((project) => (
-                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-amber-100">
+                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50">
                   <div className="relative h-64 overflow-hidden">
                     <div
                       className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-500"
@@ -116,7 +116,7 @@ const Work = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors duration-300 flex items-center gap-2"
+                            className="bg-gray-100 text-black px-4 py-2 rounded-lg hover:bg-white transition-colors duration-300 flex items-center gap-2"
                           >
                             <ExternalLink className="w-4 h-4" />
                             Live Demo
@@ -126,11 +126,11 @@ const Work = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3">{project.title}</h3>
-                    <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
+                    <h3 className="text-2xl font-bold text-white mb-3">{project.title}</h3>
+                    <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+                        <span key={tech} className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm font-medium border border-gray-700">
                           {tech}
                         </span>
                       ))}
@@ -143,13 +143,13 @@ const Work = () => {
 
           {/* All Projects */}
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center">
-              <Code className="w-8 h-8 text-orange-500 mr-3" />
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+              <Code className="w-8 h-8 text-gray-400 mr-3" />
               All Projects
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project) => (
-                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-orange-100">
+                <div key={project.id} onClick={() => window.open(project.live, '_blank')} className="cursor-pointer group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50">
                   <div className="relative h-48 overflow-hidden">
                     <div
                       className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-500"
@@ -175,7 +175,7 @@ const Work = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600 transition-colors duration-300 flex items-center gap-1"
+                            className="bg-gray-100 text-black px-3 py-1 rounded text-sm hover:bg-white transition-colors duration-300 flex items-center gap-1"
                           >
                             <ExternalLink className="w-3 h-3" />
                             Demo
@@ -185,16 +185,16 @@ const Work = () => {
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{project.title}</h3>
-                    <p className="text-slate-600 text-sm mb-3 line-clamp-3">{project.description}</p>
+                    <h3 className="text-lg font-bold text-white mb-2">{project.title}</h3>
+                    <p className="text-gray-400 text-sm mb-3 line-clamp-3">{project.description}</p>
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.slice(0, 3).map((tech) => (
-                        <span key={tech} className="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">
+                        <span key={tech} className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs border border-gray-700">
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="px-2 py-1 bg-slate-100 text-slate-600 rounded text-xs">
+                        <span className="px-2 py-1 bg-gray-800 text-gray-500 rounded text-xs border border-gray-700">
                           +{project.technologies.length - 3} more
                         </span>
                       )}
@@ -208,13 +208,13 @@ const Work = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="px-6 py-12 md:py-16 bg-gradient-to-r from-amber-500 to-orange-500">
+      <div className="px-6 py-12 md:py-16 bg-gradient-to-r from-gray-900 to-gray-800 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Start a Project?</h2>
-          <p className="text-amber-100 mb-8 text-lg">
+          <p className="text-gray-400 mb-8 text-lg">
             Let's work together to bring your ideas to life with cutting-edge technology and creative solutions.
           </p>
-          <button className="bg-white text-orange-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-amber-50 transition-colors duration-300 shadow-xl">
+          <button className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-colors duration-300 shadow-xl">
             Get In Touch
           </button>
         </div>

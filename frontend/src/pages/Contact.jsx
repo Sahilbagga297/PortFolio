@@ -97,33 +97,31 @@ const RegistrationForm = () => {
     return (
         <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
             {/* Animated Gradient Background - Same as About Page */}
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 animate-pulse"></div>
-            <div className="absolute inset-0 bg-gradient-to-tl from-amber-100/30 via-transparent to-orange-100/30 animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/50 via-amber-50/50 to-orange-50/50 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
 
             {/* Registration Form Container */}
             <div className="relative z-10 w-full max-w-lg">
-                <div className="absolute inset-0 bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl"></div>
+                <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
                 <div className="relative p-6 sm:p-12">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-gradient-to-br from-amber-600 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <div className="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-500/30">
                             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-800 via-orange-700 to-yellow-800 mb-2">
+                        <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2">
                             Get In Touch
                         </h2>
-                        <p className="text-gray-600">Let's start a conversation</p>
-                        <div className="w-20 h-1 bg-gradient-to-r from-amber-600 to-orange-600 mx-auto rounded-full mt-4"></div>
+                        <p className="text-gray-400">Let's start a conversation</p>
+                        <div className="w-20 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full mt-4"></div>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Full Name Field */}
                         <div className="relative">
-                            <label className="block text-amber-800 font-semibold mb-2 flex items-center">
-                                <svg className="w-4 h-4 mr-2 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                            <label className="block text-gray-300 font-semibold mb-2 flex items-center">
+                                <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                 </svg>
                                 Full Name
@@ -134,12 +132,12 @@ const RegistrationForm = () => {
                                     name="username"
                                     value={formData.username}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.username ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-gray-800/50 backdrop-blur-sm text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-600/50 ${errors.username ? 'border-red-400 focus:border-red-500' : 'border-gray-600 focus:border-gray-400'
                                         }`}
                                     placeholder="Enter your full name"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                     </svg>
                                 </div>
@@ -156,8 +154,8 @@ const RegistrationForm = () => {
 
                         {/* Email Field */}
                         <div className="relative">
-                            <label className="block text-amber-800 font-semibold mb-2 flex items-center">
-                                <svg className="w-4 h-4 mr-2 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                            <label className="block text-gray-300 font-semibold mb-2 flex items-center">
+                                <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                 </svg>
@@ -169,12 +167,12 @@ const RegistrationForm = () => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-gray-800/50 backdrop-blur-sm text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-600/50 ${errors.email ? 'border-red-400 focus:border-red-500' : 'border-gray-600 focus:border-gray-400'
                                         }`}
                                     placeholder="Enter your email address"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
@@ -192,8 +190,8 @@ const RegistrationForm = () => {
 
                         {/* Phone Number Field */}
                         <div className="relative">
-                            <label className="block text-amber-800 font-semibold mb-2 flex items-center">
-                                <svg className="w-4 h-4 mr-2 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                            <label className="block text-gray-300 font-semibold mb-2 flex items-center">
+                                <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                 </svg>
                                 Phone Number
@@ -204,12 +202,12 @@ const RegistrationForm = () => {
                                     name="phonenumber"
                                     value={formData.phonenumber}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 ${errors.phonenumber ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-gray-800/50 backdrop-blur-sm text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-600/50 ${errors.phonenumber ? 'border-red-400 focus:border-red-500' : 'border-gray-600 focus:border-gray-400'
                                         }`}
                                     placeholder="Enter your phone number"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                                     </svg>
                                 </div>
@@ -226,8 +224,8 @@ const RegistrationForm = () => {
 
                         {/* Message Field - Replaced Gender */}
                         <div className="relative">
-                            <label className="block text-amber-800 font-semibold mb-2 flex items-center">
-                                <svg className="w-4 h-4 mr-2 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                            <label className="block text-gray-300 font-semibold mb-2 flex items-center">
+                                <svg className="w-4 h-4 mr-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                                 </svg>
                                 Your Message
@@ -238,12 +236,12 @@ const RegistrationForm = () => {
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows="4"
-                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-white/80 backdrop-blur-sm transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200 resize-none ${errors.message ? 'border-red-400 focus:border-red-500' : 'border-amber-200 focus:border-amber-500'
+                                    className={`w-full px-4 py-3 pl-12 border-2 rounded-xl bg-gray-800/50 backdrop-blur-sm text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-600/50 resize-none ${errors.message ? 'border-red-400 focus:border-red-500' : 'border-gray-600 focus:border-gray-400'
                                         }`}
                                     placeholder="Share your query or message here..."
                                 />
                                 <div className="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
-                                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                         <path fillRule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clipRule="evenodd" />
                                     </svg>
                                 </div>
@@ -262,7 +260,7 @@ const RegistrationForm = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className={`w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-4 px-6 rounded-xl hover:from-amber-700 hover:to-orange-700 focus:outline-none focus:ring-4 focus:ring-amber-200 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                            className={`w-full bg-gradient-to-r from-gray-200 to-white text-black font-bold py-4 px-6 rounded-xl hover:from-white hover:to-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-600/50 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                                 }`}
                         >
                             {isSubmitting ? (
