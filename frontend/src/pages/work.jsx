@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { ExternalLink, Github, Code, Palette, Zap, Star } from 'lucide-react';
 import pharmaImg from '../assets/Screenshot 2025-12-30 204444.png';
 import pollsenseimg from '../assets/Screenshot 2025-09-04 004121.png';
@@ -60,6 +61,11 @@ const Work = () => {
   ];
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}>
     <div className="relative">
       {/* Header Section */}
       <div className="relative overflow-hidden">
@@ -220,6 +226,7 @@ const Work = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 

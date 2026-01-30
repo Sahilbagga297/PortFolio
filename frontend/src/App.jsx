@@ -7,9 +7,10 @@ import RegistrationForm from './pages/Contact.jsx'
 import Work from './pages/work.jsx'
 import Skills from './pages/skills.jsx'
 import Login from './pages/Login.jsx'
-
+import { AnimatePresence } from 'framer-motion'
 const App = () => {
   return (
+    <AnimatePresence mode="wait">
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
       </Route>
     </Routes>
+    </AnimatePresence>
 
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Download, Mail, Github, Linkedin, ExternalLink, Code, Palette, Zap, Coffee, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 const Sahil_Bagga_image = "/profile.jpg";
+import { motion } from 'framer-motion';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,12 +34,13 @@ const Home = () => {
   };
 
   return (
+     <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}>
     <div className="relative">
-
-
-
-
-      {/* Main Content */}
+        {/* Main Content */}
       <div className="px-6 py-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
@@ -217,6 +218,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </motion.div>
 
   );
 };

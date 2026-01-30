@@ -1,6 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
-
 const About = () => {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
@@ -13,6 +13,12 @@ const About = () => {
   };
 
   return (
+     <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
     <div className="min-h-screen relative overflow-hidden">
       <div className="relative z-10 px-4 py-8 sm:px-8 lg:px-12 font-sans">
         <div className="max-w-6xl mx-auto space-y-20">
@@ -128,6 +134,7 @@ const About = () => {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 };
 
