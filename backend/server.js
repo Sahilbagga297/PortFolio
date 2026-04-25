@@ -19,14 +19,9 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-  origin: [
-    "https://port-folio-num7.vercel.app",
-    "https://port-folio-num7-iii9s6jtj-sahil-baggas-projects.vercel.app",
-    "http://localhost:5173",
-    "https://sahil-bagga.xyz"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }));
 
 
