@@ -66,14 +66,14 @@ router.post('/', async (req, res) => {
             });
         }
 
-        // Check if contact with this email already exists
-        const existingContact = await Contact.findOne({ email: email.toLowerCase() });
-        if (existingContact) {
-            return res.status(400).json({
-                success: false,
-                message: 'A contact with this email already exists'
-            });
-        }
+        // // Check if contact with this email already exists
+        // const existingContact = await Contact.findOne({ email: email.toLowerCase() });
+        // if (existingContact) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: 'A contact with this email already exists'
+        //     });
+        // }
 
         // Create new contact and save to MongoDB
         const newContact = new Contact({
