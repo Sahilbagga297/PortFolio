@@ -1,35 +1,23 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const Contact = require('../models/Contact');
 const router = express.Router();
 
-// Create reusable transporter using Gmail SMTP
-const createTransporter = () => {
-    return nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS, // Gmail App Password (not your real password)
-        },
-    });
-};
+// Initialize Resend with API key
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Send email notification to you
+// Send email notification via Resend
 const sendEmailNotification = async (contactData) => {
     const { username, email, phonenumber, message } = contactData;
 
-    const transporter = createTransporter();
-
-    const mailOptions = {
-        from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_TO,
+    const { data, error } = await resend.emails.send({
+        from: 'Portfolio Contact <onboarding@resend.dev>', // Use your verified domain once set up
+        to: [process.env.EMAIL_TO],
         subject: `📩 New Contact Form Submission from ${username}`,
         html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9f9f9; padding: 24px; border-radius: 12px;">
                 <h2 style="color: #1a1a1a; border-bottom: 2px solid #ddd; padding-bottom: 12px;">
-                    New Contact Form Submission
+                    📬 New Contact Form Submission
                 </h2>
                 <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
                     <tr>
@@ -56,9 +44,13 @@ const sendEmailNotification = async (contactData) => {
                 </p>
             </div>
         `,
-    };
+    });
 
-    await transporter.sendMail(mailOptions);
+    if (error) {
+        throw new Error(`Resend error: ${error.message}`);
+    }
+
+    return data;
 };
 
 // POST /api/contact - Submit contact form
@@ -93,12 +85,12 @@ router.post('/', async (req, res) => {
 
         await newContact.save();
 
-        // Send email notification (non-blocking — won't fail the request if email fails)
+        // Send email notification via Resend (non-blocking)
         try {
             await sendEmailNotification({ username, email, phonenumber, message });
-            console.log(`📧 Email notification sent for contact: ${email}`);
+            console.log(`📧 Resend email sent for contact: ${email}`);
         } catch (emailError) {
-            console.error('Email notification failed (contact still saved):', emailError.message);
+            console.error('Resend email failed (contact still saved):', emailError.message);
         }
 
         res.status(201).json({
@@ -117,7 +109,6 @@ router.post('/', async (req, res) => {
     } catch (error) {
         console.error('Contact submission error:', error);
 
-        // Handle validation errors
         if (error.name === 'ValidationError') {
             const validationErrors = Object.values(error.errors).map(err => err.message);
             return res.status(400).json({
