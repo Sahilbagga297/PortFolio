@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Download, Mail, Github, Linkedin, Code, Palette, Zap, Coffee, Star, Trophy, FolderKanban, Briefcase, GraduationCap } from 'lucide-react';
+import { ArrowRight, Download, Mail, Github, Linkedin, Code, Palette, Zap, Coffee, Star, Trophy, FolderKanban, Briefcase, GraduationCap, GitBranch } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 const Sahil_Bagga_image = "/profile.jpg";
 import { motion } from 'framer-motion';
@@ -15,6 +15,7 @@ const Home = () => {
     { icon: <Code className="w-6 h-6" />, label: "Mern Stack Development", level: "Advanced", stars: 5 },
     { icon: <Palette className="w-6 h-6" />, label: "Generative AI", level: "Intermediate", stars: 4 },
     { icon: <Zap className="w-6 h-6" />, label: "Cloud Computing", level: "Beginner", stars: 3 },
+    { icon: <GitBranch className="w-6 h-6" />, label: "Open Source Contribution", level: "GSSoC '26 Contributor", stars: 4 },
   ];
 
   const achievements = [
