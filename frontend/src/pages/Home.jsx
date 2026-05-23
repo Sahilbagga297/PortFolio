@@ -20,7 +20,7 @@ const Home = () => {
   const achievements = [
     { icon: FolderKanban, number: "10+", label: "Projects Built", detail: "Full-stack web applications" },
     { icon: Briefcase, number: "2", label: "Internships", detail: "Data Science Intern @ Celebal Tech, Backend Developer @ VyapGo" },
-    { icon: Code, label: "OpenSource", detail: "OpenSource Contributor @ GssoC'26" },
+    { icon: Code, label: "OpenSource", detail: "OpenSource Contributor @ GSSoC'26" },
     { icon: GraduationCap, number: "2027", label: "B.Tech IT", detail: "Graduating student" },
   ];
 
