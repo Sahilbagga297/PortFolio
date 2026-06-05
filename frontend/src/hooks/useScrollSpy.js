@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useLenisContext } from '../context/LenisContext';
 
 const useScrollSpy = (sectionIds, options = {}) => {
-  const { offset = 100, threshold = 0.3 } = options;
+  const { offset = 100 } = options;
   const [activeSection, setActiveSection] = useState(sectionIds[0] || '');
-  const observerRef = useRef(null);
+  const lenis = useLenisContext();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -13,50 +14,40 @@ const useScrollSpy = (sectionIds, options = {}) => {
       }
     };
 
-    // Set initial section from URL hash
-    handleHashChange();
+    const updateActiveSection = () => {
+      let current = sectionIds[0];
 
-    const observerCallback = (entries) => {
-      // Find the entry that is most visible
-      const visibleEntries = entries.filter(entry => entry.isIntersecting);
-      
-      if (visibleEntries.length > 0) {
-        // Pick the one with the highest intersection ratio
-        const mostVisible = visibleEntries.reduce((prev, current) => 
-          current.intersectionRatio > prev.intersectionRatio ? current : prev
-        );
-        
-        const id = mostVisible.target.id;
-        if (id && id !== activeSection) {
-          setActiveSection(id);
-          // Update URL hash without adding to history stack
-          window.history.replaceState(null, '', `#${id}`);
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= offset) {
+          current = id;
         }
       }
+
+      setActiveSection((prev) => {
+        if (prev !== current) {
+          window.history.replaceState(null, '', `#${current}`);
+          return current;
+        }
+        return prev;
+      });
     };
 
-    observerRef.current = new IntersectionObserver(observerCallback, {
-      rootMargin: `-${offset}px 0px -40% 0px`,
-      threshold: [0, 0.1, 0.2, 0.3, 0.5, 0.7, 1],
-    });
+    handleHashChange();
+    updateActiveSection();
 
-    // Observe all sections
-    sectionIds.forEach(id => {
-      const element = document.getElementById(id);
-      if (element) {
-        observerRef.current.observe(element);
-      }
-    });
-
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection, { passive: true });
     window.addEventListener('hashchange', handleHashChange);
+    lenis?.on('scroll', updateActiveSection);
 
     return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
       window.removeEventListener('hashchange', handleHashChange);
+      lenis?.off('scroll', updateActiveSection);
     };
-  }, [sectionIds, offset, threshold]);
+  }, [sectionIds, offset, lenis]);
 
   return activeSection;
 };

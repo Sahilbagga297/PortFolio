@@ -21,20 +21,16 @@ const ContactSection = () => {
     if (prefersReducedMotion || !formRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(formRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: formRef.current,
-            start: 'top 85%',
-            once: true,
-          },
-        }
-      );
+      gsap.from(formRef.current, {
+        y: 40,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: 'top 85%',
+          once: true,
+        },
+      });
     }, formRef);
 
     return () => ctx.revert();
@@ -117,7 +113,7 @@ const ContactSection = () => {
     ) : null;
 
   return (
-    <SectionWrapper id="contact" noAnimation>
+    <SectionWrapper id="contact" noAnimation className="!pb-10 sm:!pb-12">
       <div className="flex items-center justify-center">
         <div ref={formRef} className="relative w-full max-w-lg">
           <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>

@@ -152,7 +152,7 @@ const ProjectsSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6">
-            My <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">Work</span>
+            <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">Projects</span>
           </h2>
           <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto">
             A collection of my recent projects showcasing problem-solving skills and modern web development practices.

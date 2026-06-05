@@ -1,80 +1,120 @@
 import { useRef, useEffect } from 'react';
-import { FolderKanban, Briefcase, Code, GraduationCap } from 'lucide-react';
+import { GraduationCap, Award, ExternalLink } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import useCountUp from '../hooks/useCountUp';
 import SectionWrapper from '../components/SectionWrapper';
+import AchievementHighlightCard from '../components/AchievementHighlightCard';
+import { achievements } from '../data/achievements';
+
+import awsSolutionsArchitect from '../assets/aws solutions architect.png';
+import awsCloudPractitioner from '../assets/aws cloud practitioner.png';
+import nvidiaDli from '../assets/nvidia dli certificate.png';
+import oracleDataPlatform from '../assets/oracle data platform.jpeg';
+import oracleAiFoundation from '../assets/oracle ai foundation associate.png';
+import oracleFoundationsAssociate from '../assets/oracle foundations associate.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AchievementCard = ({ icon: Icon, number, label, detail, index }) => {
-  const isNumeric = /^\d+/.test(number);
-  const numericPart = isNumeric ? parseInt(number, 10) : null;
-  const suffix = isNumeric ? number.replace(/^\d+/, '') : '';
-
-  const { displayValue, elementRef } = useCountUp(numericPart || 0, {
-    duration: 2000,
-    suffix,
-    startOnView: true,
-  });
-
-  return (
-    <div
-      ref={elementRef}
-      className="achievement-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 sm:p-5 hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20"
-    >
-      <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-gray-600/10 to-gray-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      <div className="relative flex flex-col gap-3">
-        <div className="flex items-start justify-between">
-          <div className="p-2 bg-gray-800/80 rounded-xl text-gray-300 group-hover:text-white group-hover:bg-gray-700/80 transition-colors duration-300">
-            <Icon className="w-5 h-5" />
-          </div>
-          <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            {isNumeric ? displayValue : number}
-          </span>
-        </div>
-        <div>
-          <p className="text-gray-200 font-semibold">{label}</p>
-          <p className="text-gray-500 text-xs sm:text-sm mt-0.5">{detail}</p>
-        </div>
-      </div>
+const CertificationCard = ({ title, issuer, image }) => (
+  <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20">
+    <div className="relative h-44 sm:h-52 overflow-hidden bg-gray-800/50">
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     </div>
-  );
-};
+    <div className="p-4 sm:p-5">
+      <p className="text-gray-200 font-semibold text-sm sm:text-base leading-snug mb-1">{title}</p>
+      <p className="text-gray-500 text-xs sm:text-sm mb-4">{issuer}</p>
+      <a
+        href={image}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300"
+      >
+        <ExternalLink className="w-4 h-4" />
+        View Certificate
+      </a>
+    </div>
+  </div>
+);
 
 const AchievementsSection = () => {
   const gridRef = useRef(null);
+  const certificationsRef = useRef(null);
 
-  const achievements = [
-    { icon: FolderKanban, number: '10+', label: 'Projects Built', detail: 'Full-stack web applications' },
-    { icon: Briefcase, number: '2', label: 'Internships', detail: 'Data Science Intern @ Celebal Tech, Backend Developer @ VyapGo' },
-    { icon: Code, number: '', label: 'OpenSource', detail: "OpenSource Contributor @ GSSoC'26" },
-    { icon: GraduationCap, number: '2027', label: 'B.Tech IT', detail: 'Graduating student' },
+  const certifications = [
+    {
+      title: 'AWS Certified Solutions Architect – Associate',
+      issuer: 'Amazon Web Services',
+      image: awsSolutionsArchitect,
+    },
+    {
+      title: 'AWS Certified Cloud Practitioner',
+      issuer: 'Amazon Web Services',
+      image: awsCloudPractitioner,
+    },
+    {
+      title: 'Nvidia Deep Learning Institute Certificate',
+      issuer: 'NVIDIA',
+      image: nvidiaDli,
+    },
+    {
+      title: 'Oracle Data Platform 2025 Certified Foundations Associate',
+      issuer: 'Oracle',
+      image: oracleDataPlatform,
+    },
+    {
+      title: 'Oracle AI Foundation Associate',
+      issuer: 'Oracle',
+      image: oracleAiFoundation,
+    },
+    {
+      title: 'Oracle Cloud Infrastructure 2025 Certified Foundations Associate',
+      issuer: 'Oracle',
+      image: oracleFoundationsAssociate,
+    },
   ];
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !gridRef.current) return;
+    if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const cards = gridRef.current.querySelectorAll('.achievement-card');
-      gsap.fromTo(cards,
-        { opacity: 0, y: 40, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll('.achievement-card');
+        gsap.from(cards, {
+          y: 40,
+          scale: 0.95,
           duration: 0.6,
           stagger: 0.12,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: gridRef.current,
-            start: 'top 80%',
+            start: 'top 85%',
             once: true,
           },
-        }
-      );
-    }, gridRef);
+        });
+      }
+
+      if (certificationsRef.current) {
+        const cards = certificationsRef.current.querySelectorAll('.certification-card');
+        gsap.from(cards, {
+          y: 40,
+          scale: 0.95,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: certificationsRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+        });
+      }
+    });
 
     return () => ctx.revert();
   }, []);
@@ -84,17 +124,39 @@ const AchievementsSection = () => {
       <div>
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4">
-            Achievements
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4">
+            Achievements{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
+              and Certifications
+            </span>
           </h2>
           <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full" />
         </div>
 
-        {/* Achievement Grid */}
-        <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {achievements.map((achievement, index) => (
-            <AchievementCard key={index} {...achievement} index={index} />
-          ))}
+        {/* Achievements */}
+        <div className="mb-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+            <Award className="w-8 h-8 text-gray-400 mr-3" />
+            Achievements
+          </h3>
+          <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {achievements.map((achievement, index) => (
+              <AchievementHighlightCard key={index} {...achievement} />
+            ))}
+          </div>
+        </div>
+
+        {/* Certifications */}
+        <div>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+            <GraduationCap className="w-8 h-8 text-gray-400 mr-3" />
+            Certifications
+          </h3>
+          <div ref={certificationsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {certifications.map((certification) => (
+              <CertificationCard key={certification.title} {...certification} />
+            ))}
+          </div>
         </div>
       </div>
     </SectionWrapper>

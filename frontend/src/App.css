@@ -1,5 +1,17 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* Lenis overrides */

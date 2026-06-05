@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Download, Mail, Github, Linkedin, Code, Palette, Zap, Coffee, Star, Trophy, FolderKanban, Briefcase, GraduationCap, GitBranch } from 'lucide-react';
+import { ArrowRight, Download, Mail, Github, Linkedin, Code, Palette, Zap, Coffee, Star, Trophy, GitBranch } from 'lucide-react';
+import { achievements } from '../data/achievements';
+import AchievementHighlightCard from '../components/AchievementHighlightCard';
 import { useNavigate } from 'react-router-dom';
 const Sahil_Bagga_image = "/profile.jpg";
 import { motion } from 'framer-motion';
@@ -18,17 +20,10 @@ const Home = () => {
     { icon: <GitBranch className="w-6 h-6" />, label: "Open Source Contribution", level: "GSSoC '26 Contributor", stars: 4 },
   ];
 
-  const achievements = [
-    { icon: FolderKanban, number: "10+", label: "Projects Built", detail: "Full-stack web applications" },
-    { icon: Briefcase, number: "2", label: "Internships", detail: "Data Science Intern @ Celebal Tech, Backend Developer @ VyapGo" },
-    { icon: Code, label: "OpenSource", detail: "OpenSource Contributor @ GSSoC'26" },
-    { icon: GraduationCap, number: "2027", label: "B.Tech IT", detail: "Graduating student" },
-  ];
-
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/SahilBagga_Resumepwc.pdf';
-    link.download = 'SahilBagga_Resumepwc.pdf';
+    link.href = '/Sahil_resume.pdf';
+    link.download = 'Sahil_resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -120,31 +115,9 @@ const Home = () => {
                       <span>Highlights</span>
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
-                      {achievements.map((achievement, index) => {
-                        const Icon = achievement.icon;
-                        return (
-                          <div
-                            key={index}
-                            className="group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 sm:p-5 hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20"
-                          >
-                            <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-gray-600/10 to-gray-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <div className="relative flex flex-col gap-3">
-                              <div className="flex items-start justify-between">
-                                <div className="p-2 bg-gray-800/80 rounded-xl text-gray-300 group-hover:text-white group-hover:bg-gray-700/80 transition-colors duration-300">
-                                  <Icon className="w-5 h-5" />
-                                </div>
-                                <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                                  {achievement.number}
-                                </span>
-                              </div>
-                              <div>
-                                <p className="text-gray-200 font-semibold">{achievement.label}</p>
-                                <p className="text-gray-500 text-xs sm:text-sm mt-0.5">{achievement.detail}</p>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
+                      {achievements.map((achievement, index) => (
+                        <AchievementHighlightCard key={index} {...achievement} />
+                      ))}
                     </div>
                   </div>
                 </div>

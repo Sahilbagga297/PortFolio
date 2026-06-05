@@ -12,8 +12,8 @@ const FloatingDock = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/SahilBagga_Resumepwc.pdf';
-    link.download = 'SahilBagga_Resumepwc.pdf';
+    link.href = '/Sahil_resume.pdf';
+    link.download = 'Sahil_resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();

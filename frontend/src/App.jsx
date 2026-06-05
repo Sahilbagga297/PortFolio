@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import Layout from './components/Layout.jsx';
 import Preloader from './components/Preloader.jsx';
@@ -15,6 +15,11 @@ const App = () => {
   const handlePreloaderComplete = useCallback(() => {
     setIsLoaded(true);
   }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    window.dispatchEvent(new Event('resize'));
+  }, [isLoaded]);
 
   return (
     <>

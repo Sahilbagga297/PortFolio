@@ -50,8 +50,8 @@ const HeroSection = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/SahilBagga_Resumepwc.pdf';
-    link.download = 'SahilBagga_Resumepwc.pdf';
+    link.href = '/Sahil_resume.pdf';
+    link.download = 'Sahil_resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -136,7 +136,7 @@ const HeroSection = () => {
                 onClick={() => scrollTo('#projects')}
                 className="group bg-gradient-to-r from-gray-200 to-white hover:from-white hover:to-gray-100 text-black px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl shadow-gray-800/50 hover:shadow-gray-700/60"
               >
-                <span>View My Work</span>
+                <span>View Projects</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
               </button>
 

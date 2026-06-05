@@ -58,8 +58,8 @@ const ExperienceSection = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/SahilBagga_Resumepwc.pdf';
-    link.download = 'SahilBagga_Resumepwc.pdf';
+    link.href = '/Sahil_resume.pdf';
+    link.download = 'Sahil_resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -67,6 +67,12 @@ const ExperienceSection = () => {
   };
 
   const experiences = [
+    {
+      type: 'work',
+      title: 'Data Science Intern',
+      subtitle: 'Celebal Technologies, Jaipur',
+      text: 'Worked on data science projects, analytics, and machine learning workflows.',
+    },
     {
       type: 'work',
       title: 'MERN Stack Intern',
@@ -125,7 +131,7 @@ const ExperienceSection = () => {
           <div className="timeline-line-fill absolute inset-0 bg-gradient-to-b from-gray-500 to-gray-300 origin-top" />
         </div>
 
-        <div className="space-y-12 lg:grid lg:grid-cols-2 lg:gap-12 lg:space-y-0">
+        <div className="space-y-12 max-w-3xl mx-auto">
           {/* Experience */}
           <div className="space-y-6">
             <div className="relative">

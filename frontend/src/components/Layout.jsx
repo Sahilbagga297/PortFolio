@@ -14,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Layout = ({ children }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const [lenisInstance, setLenisInstance] = useState(null);
   const lenisRef = useRef(null);
 
   // Initialize Lenis
@@ -31,15 +32,42 @@ const Layout = ({ children }) => {
     });
 
     lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // Connect Lenis to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
+
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+    });
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
 
     gsap.ticker.lagSmoothing(0);
+
+    const refreshScroll = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
+
+    refreshScroll();
+    window.addEventListener('resize', refreshScroll);
+    window.addEventListener('load', refreshScroll);
 
     // Handle deep linking on initial load
     const hash = window.location.hash;
@@ -50,8 +78,12 @@ const Layout = ({ children }) => {
     }
 
     return () => {
+      window.removeEventListener('resize', refreshScroll);
+      window.removeEventListener('load', refreshScroll);
       gsap.ticker.remove(lenis.raf);
+      ScrollTrigger.scrollerProxy(document.documentElement, null);
       lenis.destroy();
+      setLenisInstance(null);
     };
   }, []);
 
@@ -74,8 +106,8 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
-    <LenisProvider value={lenisRef.current}>
-      <div className="flex flex-col min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-950 via-black to-gray-900">
+    <LenisProvider value={lenisInstance}>
+      <div className="relative flex flex-col min-h-screen overflow-x-hidden bg-gradient-to-br from-gray-950 via-black to-gray-900">
         {/* Enhanced Animated Background Elements */}
         <div className="absolute inset-0 z-0">
           {/* Gradient orbs with improved positioning */}
@@ -173,10 +205,10 @@ const Layout = ({ children }) => {
         {/* Scroll Progress Bar */}
         <ScrollProgress />
 
-        <div className="relative z-10 flex flex-col min-h-screen">
+        <div className="relative z-10 flex flex-col">
           <Navbar />
           <FloatingDock />
-          <main className="flex-1 pt-24">
+          <main className="w-full pt-24">
             {children}
           </main>
           <BackToTop />
