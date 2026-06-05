@@ -1,30 +1,66 @@
-import React from 'react'
-import { Routes, Route, Router } from 'react-router-dom'
-import Layout from './components/Layout.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import RegistrationForm from './pages/Contact.jsx'
-import Work from './pages/work.jsx'
-import Skills from './pages/skills.jsx'
-import Login from './pages/Login.jsx'
-import { AnimatePresence } from 'framer-motion'
-const App = () => {
-  return (
-    <AnimatePresence mode="wait">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<RegistrationForm />} />
-          <Route path="Skills" element={<Skills />} />
-          <Route path="Work" element={<Work />} />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
-    </AnimatePresence>
+import React, { useState, useCallback } from 'react';
+import './App.css';
+import Layout from './components/Layout.jsx';
+import Preloader from './components/Preloader.jsx';
+import HeroSection from './sections/HeroSection.jsx';
+import AboutSection from './sections/AboutSection.jsx';
+import ExperienceSection from './sections/ExperienceSection.jsx';
+import ProjectsSection from './sections/ProjectsSection.jsx';
+import AchievementsSection from './sections/AchievementsSection.jsx';
+import ContactSection from './sections/ContactSection.jsx';
 
+const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const handlePreloaderComplete = useCallback(() => {
+    setIsLoaded(true);
+  }, []);
+
+  return (
+    <>
+      <Preloader onComplete={handlePreloaderComplete} />
+      <div
+        className={`transition-opacity duration-500 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <Layout>
+          <HeroSection />
+
+          {/* Section separator */}
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          </div>
+
+          <AboutSection />
+
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          </div>
+
+          <ExperienceSection />
+
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          </div>
+
+          <ProjectsSection />
+
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          </div>
+
+          <AchievementsSection />
+
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+          </div>
+
+          <ContactSection />
+        </Layout>
+      </div>
+    </>
   );
 };
 
 export default App;
-
