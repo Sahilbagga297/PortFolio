@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 // Mock validation schema and form hook for demonstration
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
@@ -95,11 +94,7 @@ const RegistrationForm = () => {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}>
+        <div>
             <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
                 {/* Animated Gradient Background - Same as About Page */}
 
@@ -289,7 +284,7 @@ const RegistrationForm = () => {
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 };
 

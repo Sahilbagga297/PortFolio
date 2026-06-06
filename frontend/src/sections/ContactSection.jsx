@@ -1,9 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
-
-gsap.registerPlugin(ScrollTrigger);
+import useInView from '../hooks/useInView';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -14,27 +11,7 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !formRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.from(formRef.current, {
-        y: 40,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      });
-    }, formRef);
-
-    return () => ctx.revert();
-  }, []);
+  const [formRef, formInView] = useInView({ threshold: 0.1 });
 
   const validateForm = () => {
     const newErrors = {};
@@ -115,7 +92,10 @@ const ContactSection = () => {
   return (
     <SectionWrapper id="contact" noAnimation className="!pb-10 sm:!pb-12">
       <div className="flex items-center justify-center">
-        <div ref={formRef} className="relative w-full max-w-lg">
+        <div
+          ref={formRef}
+          className={`relative w-full max-w-lg fade-up ${formInView ? 'is-visible' : ''}`}
+        >
           <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
           <div className="relative p-6 sm:p-12">
             {/* Header */}

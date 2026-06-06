@@ -1,60 +1,9 @@
-import { useEffect, useRef } from 'react';
 import { Download } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionWrapper from '../components/SectionWrapper';
-
-gsap.registerPlugin(ScrollTrigger);
+import useInView from '../hooks/useInView';
 
 const ExperienceSection = () => {
-  const timelineRef = useRef(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !timelineRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const items = timelineRef.current.querySelectorAll('.timeline-item');
-      const line = timelineRef.current.querySelector('.timeline-line-fill');
-
-      // Animate timeline line
-      if (line) {
-        gsap.fromTo(line,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: timelineRef.current,
-              start: 'top 80%',
-              end: 'bottom 60%',
-              scrub: 1,
-            },
-          }
-        );
-      }
-
-      // Animate each timeline item
-      items.forEach((item, i) => {
-        gsap.fromTo(item,
-          { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      });
-    }, timelineRef);
-
-    return () => ctx.revert();
-  }, []);
+  const [timelineRef, timelineInView] = useInView({ threshold: 0.1 });
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
@@ -103,7 +52,10 @@ const ExperienceSection = () => {
   ];
 
   const TimelineCard = ({ item, index }) => (
-    <div className="timeline-item bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300">
+    <div
+      className={`fade-up ${timelineInView ? 'is-visible' : ''} bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300`}
+      style={{ '--delay': index }}
+    >
       <div className="flex items-start gap-3">
         <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
         <div>
@@ -168,7 +120,7 @@ const ExperienceSection = () => {
                   Education
                 </h3>
                 {education.map((item, i) => (
-                  <TimelineCard key={i} item={item} index={i} />
+                  <TimelineCard key={i} item={item} index={i + experiences.length} />
                 ))}
               </div>
             </div>

@@ -3,34 +3,178 @@ body,
 #root {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 body {
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* Lenis overrides */
-html.lenis, html.lenis body {
-  height: auto;
+/* ===== Scroll-driven animation classes ===== */
+
+/* Fade up — the primary entrance animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--delay, 0) * 0.12s);
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+/* Fade in — simple opacity */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--delay, 0) * 0.12s);
 }
 
-.lenis.lenis-stopped {
-  overflow: hidden;
+.fade-in.is-visible {
+  opacity: 1;
 }
 
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+/* Slide in from left */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--delay, 0) * 0.12s);
+}
+
+.slide-in-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide in from right */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--delay, 0) * 0.12s);
+}
+
+.slide-in-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale in */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--delay, 0) * 0.12s);
+}
+
+.scale-in.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== Background float animations ===== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(-20px); }
+  50% { transform: translateY(0px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+/* ===== Preloader animations ===== */
+@keyframes preloader-logo-in {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes preloader-bar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes preloader-text-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes preloader-exit {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95); }
+}
+
+/* ===== Timeline line fill ===== */
+@keyframes timeline-fill {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.timeline-line-fill {
+  animation: timeline-fill 1s ease-out forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 60%;
+}
+
+/* Fallback for browsers without animation-timeline support */
+@supports not (animation-timeline: view()) {
+  .timeline-line-fill {
+    animation: none;
+    transform: scaleY(1);
+  }
+}
+
+/* ===== Scroll progress bar ===== */
+@keyframes scroll-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.scroll-progress-bar {
+  animation: scroll-grow linear forwards;
+  animation-timeline: scroll();
+}
+
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress-bar {
+    animation: none;
+    /* JS fallback will set scaleX via inline style */
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-up,
+  .fade-in,
+  .slide-in-left,
+  .slide-in-right,
+  .scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

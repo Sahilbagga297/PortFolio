@@ -1,9 +1,6 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
-import { useLenisContext } from '../context/LenisContext';
 
 const Footer = () => {
-  const lenis = useLenisContext();
-
   const navItems = [
     { name: 'Home', target: '#home' },
     { name: 'About', target: '#about' },
@@ -19,8 +16,11 @@ const Footer = () => {
   ];
 
   const handleNavClick = (target) => {
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+    const el = document.querySelector(target);
+    if (el) {
+      const offset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 

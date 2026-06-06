@@ -1,13 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
-  const skillsGridRef = useRef(null);
 
   const technicalSkills = {
     'Programming Languages': [
@@ -71,26 +66,6 @@ const AboutSection = () => {
     }
     return Object.values(technicalSkills).flat().filter(skill => skill.category === activeCategory);
   };
-
-  // Animate skills grid when filter changes
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !skillsGridRef.current) return;
-
-    const cards = skillsGridRef.current.querySelectorAll('.skill-card');
-
-    const applyTransition = () => {
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          gsap.fromTo(cards, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out' });
-        });
-      } else {
-        gsap.fromTo(cards, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out' });
-      }
-    };
-
-    applyTransition();
-  }, [activeCategory]);
 
   const SkillBar = ({ skill }) => (
     <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] border border-gray-700/50">
@@ -174,7 +149,7 @@ const AboutSection = () => {
                     </div>
                     {categoryName}
                   </h4>
-                  <div ref={skillsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {skills.map((skill, index) => (
                       <SkillBar key={index} skill={skill} />
                     ))}
@@ -183,9 +158,9 @@ const AboutSection = () => {
               ))}
             </div>
           ) : (
-            <div ref={skillsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {getFilteredSkills().map((skill, index) => (
-                <SkillBar key={index} skill={skill} />
+                <SkillBar key={`${skill.name}-${index}`} skill={skill} />
               ))}
             </div>
           )}

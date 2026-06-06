@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Mail, Lock, ArrowRight, User } from 'lucide-react';
 
 const Login = () => {
@@ -24,11 +23,7 @@ const Login = () => {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}>
+        <div>
         <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
 
 
@@ -121,7 +116,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-        </motion.div>
+        </div>
     );
 };
 

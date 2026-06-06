@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Coffee } from 'lucide-react';
-import { useLenisContext } from '../context/LenisContext';
 import useScrollSpy from '../hooks/useScrollSpy';
 
 const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'achievements', 'contact'];
@@ -8,7 +7,6 @@ const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'achievements', 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const lenis = useLenisContext();
   const activeSection = useScrollSpy(SECTION_IDS, { offset: 100 });
 
   const navItems = [
@@ -29,25 +27,24 @@ const Navbar = () => {
   }, []);
 
   const handleNavClick = useCallback((target) => {
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
-    } else {
-      // Fallback
-      const el = document.querySelector(target);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    const el = document.querySelector(target);
+    if (el) {
+      const offset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
-  }, [lenis]);
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md px-6 py-6 z-50 shadow-lg rounded-3xl">
+    <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md px-4 sm:px-6 py-4 sm:py-6 z-50 shadow-lg rounded-3xl">
       <div className="max-w-7xl mx-auto">
         <div
-          className={`bg-gray-900/60 backdrop-blur-lg border border-gray-700/50 rounded-2xl px-8 py-4 shadow-xl shadow-gray-900/20 transition-all duration-500 ${
+          className={`bg-gray-900/60 backdrop-blur-lg border border-gray-700/50 rounded-2xl px-4 sm:px-8 py-3 sm:py-4 shadow-xl shadow-gray-900/20 transition-all duration-500 ${
             isScrolled ? 'bg-gray-900/80 border-gray-600/60' : ''
           }`}
         >
@@ -55,12 +52,12 @@ const Navbar = () => {
             {/* Logo */}
             <button
               onClick={() => handleNavClick('#home')}
-              className="flex items-center space-x-3 cursor-pointer"
+              className="flex items-center space-x-2 sm:space-x-3 cursor-pointer"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl flex items-center justify-center">
-                <Coffee className="w-6 h-6 text-white" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gradient-to-r from-gray-700 to-gray-600 rounded-xl flex items-center justify-center">
+                <Coffee className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
                 Portfolio
               </span>
             </button>
@@ -106,9 +103,13 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-gray-900/95 backdrop-blur-lg border border-gray-700/50 rounded-b-2xl shadow-xl shadow-black/50 mt-2 py-4 px-8 absolute w-[calc(100%-3rem)] left-6 right-6">
+        {/* Mobile Menu — animated with CSS transitions */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'
+          }`}
+        >
+          <div className="bg-gray-900/95 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-xl shadow-black/50 py-4 px-6 sm:px-8">
             <ul className="flex flex-col space-y-4">
               {navItems.map((item) => {
                 const sectionId = item.target.replace('#', '');
@@ -128,7 +129,7 @@ const Navbar = () => {
               })}
             </ul>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

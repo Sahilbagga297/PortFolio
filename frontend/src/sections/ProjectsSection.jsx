@@ -1,9 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { ExternalLink, Github, Code, Star } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useLenisContext } from '../context/LenisContext';
 import SectionWrapper from '../components/SectionWrapper';
+import useInView from '../hooks/useInView';
 
 import pharmaImg from '../assets/Screenshot 2025-12-30 204444.png';
 import pollsenseimg from '../assets/Screenshot 2025-09-04 004121.png';
@@ -11,11 +8,9 @@ import nidhisetuimg from '../assets/Screenshot 2025-12-30 210502.png';
 import Buildbazarimg from '../assets/Screenshot 2025-12-30 210813.png';
 import portfolioimg from '../assets/Screenshot 2025-12-30 211557.png';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const ProjectsSection = () => {
-  const lenis = useLenisContext();
-  const projectsRef = useRef(null);
+  const [featuredRef, featuredInView] = useInView({ threshold: 0.1 });
+  const [allRef, allInView] = useInView({ threshold: 0.1 });
 
   const projects = [
     {
@@ -70,85 +65,18 @@ const ProjectsSection = () => {
     },
   ];
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !projectsRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Featured project parallax images
-      const featuredCards = projectsRef.current.querySelectorAll('.project-featured');
-      featuredCards.forEach((card) => {
-        const img = card.querySelector('.project-image');
-        if (img) {
-          gsap.fromTo(img,
-            { y: 40, scale: 1.1 },
-            {
-              y: -40,
-              scale: 1,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1,
-              },
-            }
-          );
-        }
-
-        // Card content stagger
-        const content = card.querySelector('.project-content');
-        if (content) {
-          gsap.fromTo(content.children,
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.1,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-                once: true,
-              },
-            }
-          );
-        }
-      });
-
-      // Regular project cards
-      const regularCards = projectsRef.current.querySelectorAll('.project-regular');
-      regularCards.forEach((card, i) => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              once: true,
-            },
-          }
-        );
-      });
-    }, projectsRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const scrollTo = (target) => {
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+    const el = document.querySelector(target);
+    if (el) {
+      const offset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   };
 
   return (
     <SectionWrapper id="projects" noAnimation>
-      <div ref={projectsRef}>
+      <div>
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6">
@@ -163,21 +91,22 @@ const ProjectsSection = () => {
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-16">
+        <div className="mb-16" ref={featuredRef}>
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Star className="w-8 h-8 text-gray-400 mr-3" />
             Featured Projects
           </h3>
           <div className="grid lg:grid-cols-2 gap-8">
-            {projects.filter(p => p.featured).map((project) => (
+            {projects.filter(p => p.featured).map((project, idx) => (
               <div
                 key={project.id}
-                className="project-featured group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
+                className={`fade-up ${featuredInView ? 'is-visible' : ''} group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer`}
+                style={{ '--delay': idx }}
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-64 overflow-hidden">
                   <div
-                    className="project-image w-full h-full bg-center bg-cover"
+                    className="w-full h-full bg-center bg-cover group-hover:scale-105 transition-transform duration-500"
                     style={{ backgroundImage: `url(${project.image})` }}
                     role="img"
                     aria-label={project.title}
@@ -209,7 +138,7 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                 </div>
-                <div className="project-content p-6">
+                <div className="p-6">
                   <h4 className="text-2xl font-bold text-white mb-3">{project.title}</h4>
                   <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
@@ -226,16 +155,17 @@ const ProjectsSection = () => {
         </div>
 
         {/* All Projects */}
-        <div>
+        <div ref={allRef}>
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Code className="w-8 h-8 text-gray-400 mr-3" />
             All Projects
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
+            {projects.map((project, idx) => (
               <div
                 key={project.id}
-                className="project-regular group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
+                className={`fade-up ${allInView ? 'is-visible' : ''} group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer`}
+                style={{ '--delay': idx }}
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-48 overflow-hidden">

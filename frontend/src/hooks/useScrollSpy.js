@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useLenisContext } from '../context/LenisContext';
 
 const useScrollSpy = (sectionIds, options = {}) => {
   const { offset = 100 } = options;
   const [activeSection, setActiveSection] = useState(sectionIds[0] || '');
-  const lenis = useLenisContext();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -39,15 +37,13 @@ const useScrollSpy = (sectionIds, options = {}) => {
     window.addEventListener('scroll', updateActiveSection, { passive: true });
     window.addEventListener('resize', updateActiveSection, { passive: true });
     window.addEventListener('hashchange', handleHashChange);
-    lenis?.on('scroll', updateActiveSection);
 
     return () => {
       window.removeEventListener('scroll', updateActiveSection);
       window.removeEventListener('resize', updateActiveSection);
       window.removeEventListener('hashchange', handleHashChange);
-      lenis?.off('scroll', updateActiveSection);
     };
-  }, [sectionIds, offset, lenis]);
+  }, [sectionIds, offset]);
 
   return activeSection;
 };

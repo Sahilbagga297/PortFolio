@@ -4,7 +4,6 @@ import { achievements } from '../data/achievements';
 import AchievementHighlightCard from '../components/AchievementHighlightCard';
 import { useNavigate } from 'react-router-dom';
 const Sahil_Bagga_image = "/profile.jpg";
-import { motion } from 'framer-motion';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,11 +30,7 @@ const Home = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}>
+    <div>
       <div className="relative">
         {/* Main Content */}
         <div className="px-6 py-16">
@@ -216,7 +211,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
 
   );
 };

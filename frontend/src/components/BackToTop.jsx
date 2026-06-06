@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
-import { useLenisContext } from '../context/LenisContext';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const lenis = useLenisContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +14,7 @@ const BackToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    if (lenis) {
-      lenis.scrollTo(0, { duration: 1.5 });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

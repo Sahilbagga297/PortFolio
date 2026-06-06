@@ -1,10 +1,8 @@
-import { useRef, useEffect } from 'react';
 import { GraduationCap, Award, ExternalLink } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionWrapper from '../components/SectionWrapper';
 import AchievementHighlightCard from '../components/AchievementHighlightCard';
 import { achievements } from '../data/achievements';
+import useInView from '../hooks/useInView';
 
 import awsSolutionsArchitect from '../assets/aws solutions architect.png';
 import awsCloudPractitioner from '../assets/aws cloud practitioner.png';
@@ -12,8 +10,6 @@ import nvidiaDli from '../assets/nvidia dli certificate.png';
 import oracleDataPlatform from '../assets/oracle data platform.jpeg';
 import oracleAiFoundation from '../assets/oracle ai foundation associate.png';
 import oracleFoundationsAssociate from '../assets/oracle foundations associate.png';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const CertificationCard = ({ title, issuer, image }) => (
   <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20">
@@ -42,8 +38,8 @@ const CertificationCard = ({ title, issuer, image }) => (
 );
 
 const AchievementsSection = () => {
-  const gridRef = useRef(null);
-  const certificationsRef = useRef(null);
+  const [achievementsRef, achievementsInView] = useInView({ threshold: 0.1 });
+  const [certsRef, certsInView] = useInView({ threshold: 0.1 });
 
   const certifications = [
     {
@@ -78,47 +74,6 @@ const AchievementsSection = () => {
     },
   ];
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    const ctx = gsap.context(() => {
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll('.achievement-card');
-        gsap.from(cards, {
-          y: 40,
-          scale: 0.95,
-          duration: 0.6,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: 'top 85%',
-            once: true,
-          },
-        });
-      }
-
-      if (certificationsRef.current) {
-        const cards = certificationsRef.current.querySelectorAll('.certification-card');
-        gsap.from(cards, {
-          y: 40,
-          scale: 0.95,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: certificationsRef.current,
-            start: 'top 85%',
-            once: true,
-          },
-        });
-      }
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <SectionWrapper id="achievements" noAnimation>
       <div>
@@ -139,9 +94,15 @@ const AchievementsSection = () => {
             <Award className="w-8 h-8 text-gray-400 mr-3" />
             Achievements
           </h3>
-          <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div ref={achievementsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {achievements.map((achievement, index) => (
-              <AchievementHighlightCard key={index} {...achievement} />
+              <div
+                key={index}
+                className={`fade-up ${achievementsInView ? 'is-visible' : ''}`}
+                style={{ '--delay': index }}
+              >
+                <AchievementHighlightCard {...achievement} />
+              </div>
             ))}
           </div>
         </div>
@@ -152,9 +113,15 @@ const AchievementsSection = () => {
             <GraduationCap className="w-8 h-8 text-gray-400 mr-3" />
             Certifications
           </h3>
-          <div ref={certificationsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {certifications.map((certification) => (
-              <CertificationCard key={certification.title} {...certification} />
+          <div ref={certsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {certifications.map((certification, index) => (
+              <div
+                key={certification.title}
+                className={`fade-up ${certsInView ? 'is-visible' : ''}`}
+                style={{ '--delay': index }}
+              >
+                <CertificationCard {...certification} />
+              </div>
             ))}
           </div>
         </div>
