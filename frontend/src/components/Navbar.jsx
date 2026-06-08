@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Coffee } from 'lucide-react';
 import useScrollSpy from '../hooks/useScrollSpy';
+import gsap from 'gsap';
 
 const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'achievements', 'contact'];
 
@@ -8,6 +9,13 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const activeSection = useScrollSpy(SECTION_IDS, { offset: 100 });
+
+  useEffect(() => {
+    gsap.fromTo('.navbar-container',
+      { y: -80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', delay: 0.1 }
+    );
+  }, []);
 
   const navItems = [
     { name: 'Home', target: '#home' },
@@ -41,7 +49,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-transparent backdrop-blur-md px-4 sm:px-6 py-4 sm:py-6 z-50 shadow-lg rounded-3xl">
+    <nav className="navbar-container fixed top-0 w-full bg-transparent backdrop-blur-md px-4 sm:px-6 py-4 sm:py-6 z-50 shadow-lg rounded-3xl">
       <div className="max-w-7xl mx-auto">
         <div
           className={`bg-gray-900/60 backdrop-blur-lg border border-gray-700/50 rounded-2xl px-4 sm:px-8 py-3 sm:py-4 shadow-xl shadow-gray-900/20 transition-all duration-500 ${

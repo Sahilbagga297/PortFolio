@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
+import gsap from 'gsap';
 
 const AboutSection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const skillsContainerRef = useRef(null);
 
   const technicalSkills = {
     'Programming Languages': [
@@ -67,8 +69,39 @@ const AboutSection = () => {
     return Object.values(technicalSkills).flat().filter(skill => skill.category === activeCategory);
   };
 
+  // Stagger reveal animation whenever activeCategory updates
+  useEffect(() => {
+    if (skillsContainerRef.current) {
+      const cards = skillsContainerRef.current.querySelectorAll('.skill-card');
+      if (cards.length > 0) {
+        gsap.killTweensOf(cards);
+
+        // Hardware capabilities check
+        const isLowEndDevice =
+          (typeof navigator !== 'undefined') && (
+            (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+            (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
+          );
+
+        if (isLowEndDevice) {
+          // 60FPS lightweight opacity animation
+          gsap.fromTo(cards,
+            { opacity: 0 },
+            { opacity: 1, duration: 0.35, stagger: 0.03, ease: 'sine.out' }
+          );
+        } else {
+          // Premium slide-up stagger animation
+          gsap.fromTo(cards,
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'power2.out' }
+          );
+        }
+      }
+    }
+  }, [activeCategory]);
+
   const SkillBar = ({ skill }) => (
-    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] border border-gray-700/50">
+    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] border border-gray-700/50 will-change-[transform,opacity]">
       <div className="flex items-center">
         <span className="font-semibold text-gray-200">{skill.name}</span>
       </div>
@@ -128,7 +161,7 @@ const AboutSection = () => {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${activeCategory === category.id
+                className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${activeCategory === category.id
                   ? 'bg-gradient-to-r from-gray-200 to-white text-black shadow-lg'
                   : 'bg-gray-800/60 backdrop-blur-sm text-gray-400 hover:bg-gray-700/80 border border-gray-700/50'
                   }`}
@@ -138,32 +171,34 @@ const AboutSection = () => {
             ))}
           </div>
 
-          {/* Skills Grid */}
-          {activeCategory === 'all' ? (
-            <div className="space-y-12">
-              {Object.entries(technicalSkills).map(([categoryName, skills]) => (
-                <div key={categoryName}>
-                  <h4 className="text-2xl font-bold text-gray-200 mb-6 flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
-                      <span className="text-white font-bold">{categoryName.charAt(0)}</span>
+          {/* Skills Grid container */}
+          <div ref={skillsContainerRef}>
+            {activeCategory === 'all' ? (
+              <div className="space-y-12">
+                {Object.entries(technicalSkills).map(([categoryName, skills]) => (
+                  <div key={categoryName}>
+                    <h4 className="text-2xl font-bold text-gray-200 mb-6 flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl flex items-center justify-center mr-4">
+                        <span className="text-white font-bold">{categoryName.charAt(0)}</span>
+                      </div>
+                      {categoryName}
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {skills.map((skill, index) => (
+                        <SkillBar key={index} skill={skill} />
+                      ))}
                     </div>
-                    {categoryName}
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {skills.map((skill, index) => (
-                      <SkillBar key={index} skill={skill} />
-                    ))}
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {getFilteredSkills().map((skill, index) => (
-                <SkillBar key={`${skill.name}-${index}`} skill={skill} />
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {getFilteredSkills().map((skill, index) => (
+                  <SkillBar key={`${skill.name}-${index}`} skill={skill} />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
-import useInView from '../hooks/useInView';
+import useGsapReveal from '../hooks/useGsapReveal';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +11,13 @@ const ContactSection = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formRef, formInView] = useInView({ threshold: 0.1 });
+
+  // Apply GSAP scale-in scroll animation to the form card
+  const formRef = useGsapReveal({
+    animation: 'scale-in',
+    duration: 0.8,
+    scrollTriggerOptions: { start: 'top 88%' }
+  });
 
   const validateForm = () => {
     const newErrors = {};
@@ -94,7 +100,7 @@ const ContactSection = () => {
       <div className="flex items-center justify-center">
         <div
           ref={formRef}
-          className={`relative w-full max-w-lg fade-up ${formInView ? 'is-visible' : ''}`}
+          className="relative w-full max-w-lg will-change-[transform,opacity]"
         >
           <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
           <div className="relative p-6 sm:p-12">
@@ -223,7 +229,7 @@ const ContactSection = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full bg-gradient-to-r from-gray-200 to-white text-black font-bold py-4 px-6 rounded-xl hover:from-white hover:to-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-600/50 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full bg-gradient-to-r from-gray-200 to-white text-black font-bold py-4 px-6 rounded-xl hover:from-white hover:to-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-600/50 transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isSubmitting ? (
                   <>

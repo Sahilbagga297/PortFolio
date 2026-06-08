@@ -2,7 +2,7 @@ import { GraduationCap, Award, ExternalLink } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import AchievementHighlightCard from '../components/AchievementHighlightCard';
 import { achievements } from '../data/achievements';
-import useInView from '../hooks/useInView';
+import useGsapReveal from '../hooks/useGsapReveal';
 
 import awsSolutionsArchitect from '../assets/aws solutions architect.png';
 import awsCloudPractitioner from '../assets/aws cloud practitioner.png';
@@ -12,7 +12,7 @@ import oracleAiFoundation from '../assets/oracle ai foundation associate.png';
 import oracleFoundationsAssociate from '../assets/oracle foundations associate.png';
 
 const CertificationCard = ({ title, issuer, image }) => (
-  <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20">
+  <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20 will-change-[transform,opacity]">
     <div className="relative h-44 sm:h-52 overflow-hidden bg-gray-800/50">
       <img
         src={image}
@@ -38,8 +38,18 @@ const CertificationCard = ({ title, issuer, image }) => (
 );
 
 const AchievementsSection = () => {
-  const [achievementsRef, achievementsInView] = useInView({ threshold: 0.1 });
-  const [certsRef, certsInView] = useInView({ threshold: 0.1 });
+  // Staggered reveals for grids
+  const achievementsRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.08,
+    scrollTriggerOptions: { start: 'top 85%' }
+  });
+
+  const certsRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.1,
+    scrollTriggerOptions: { start: 'top 85%' }
+  });
 
   const certifications = [
     {
@@ -98,8 +108,7 @@ const AchievementsSection = () => {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className={`fade-up ${achievementsInView ? 'is-visible' : ''}`}
-                style={{ '--delay': index }}
+                className="will-change-[transform,opacity]"
               >
                 <AchievementHighlightCard {...achievement} />
               </div>
@@ -114,11 +123,10 @@ const AchievementsSection = () => {
             Certifications
           </h3>
           <div ref={certsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {certifications.map((certification, index) => (
+            {certifications.map((certification) => (
               <div
                 key={certification.title}
-                className={`fade-up ${certsInView ? 'is-visible' : ''}`}
-                style={{ '--delay': index }}
+                className="will-change-[transform,opacity]"
               >
                 <CertificationCard {...certification} />
               </div>

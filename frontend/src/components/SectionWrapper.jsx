@@ -1,16 +1,22 @@
-import { useRef } from 'react';
-import useInView from '../hooks/useInView';
+import useGsapReveal from '../hooks/useGsapReveal';
 
 const SectionWrapper = ({ id, className = '', children, noAnimation = false }) => {
-  const [ref, isInView] = useInView({ threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  // Apply GSAP scroll trigger animation to the section container (unless animated children are handled locally)
+  const ref = useGsapReveal({
+    animation: noAnimation ? 'none' : 'fade-up',
+    duration: 0.8,
+    scrollTriggerOptions: {
+      start: 'top 88%',
+    }
+  });
 
   return (
     <section
       id={id}
-      ref={ref}
+      ref={noAnimation ? null : ref}
       className={`relative px-4 sm:px-6 lg:px-8 py-16 sm:py-24 ${className}`}
     >
-      <div className={`max-w-7xl mx-auto ${!noAnimation ? 'fade-up' : ''} ${isInView ? 'is-visible' : ''}`}>
+      <div className="max-w-7xl mx-auto">
         {children}
       </div>
     </section>

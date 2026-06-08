@@ -121,24 +121,17 @@ body {
   100% { opacity: 0; transform: scale(0.95); }
 }
 
-/* ===== Timeline line fill ===== */
-@keyframes timeline-fill {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
-
+/* ===== Timeline line fill (Handled via GSAP ScrollTrigger for cross-browser 60FPS compatibility) ===== */
 .timeline-line-fill {
-  animation: timeline-fill 1s ease-out forwards;
-  animation-timeline: view();
-  animation-range: entry 0% cover 60%;
+  transform-origin: top;
+  will-change: transform;
 }
 
-/* Fallback for browsers without animation-timeline support */
-@supports not (animation-timeline: view()) {
-  .timeline-line-fill {
-    animation: none;
-    transform: scaleY(1);
-  }
+/* Optimized hardware acceleration utilities */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* ===== Scroll progress bar ===== */

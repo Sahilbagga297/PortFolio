@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
 import { Download } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
-import useInView from '../hooks/useInView';
+import useGsapReveal from '../hooks/useGsapReveal';
+import gsap from 'gsap';
 
 const ExperienceSection = () => {
-  const [timelineRef, timelineInView] = useInView({ threshold: 0.1 });
-
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = '/Sahil_resume.pdf';
@@ -51,21 +51,33 @@ const ExperienceSection = () => {
     },
   ];
 
-  const TimelineCard = ({ item, index }) => (
-    <div
-      className={`fade-up ${timelineInView ? 'is-visible' : ''} bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300`}
-      style={{ '--delay': index }}
-    >
-      <div className="flex items-start gap-3">
-        <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
-        <div>
-          <h4 className="font-bold text-gray-200 text-lg">{item.title}</h4>
-          <p className="text-gray-400 text-sm mt-1">{item.subtitle}</p>
-          <p className="text-gray-400 mt-3">{item.text}</p>
+
+
+  const TimelineCard = ({ item }) => {
+    const cardRef = useGsapReveal({
+      animation: 'fade-up',
+      duration: 0.6,
+      scrollTriggerOptions: {
+        start: 'top 90%'
+      }
+    });
+
+    return (
+      <div
+        ref={cardRef}
+        className="opacity-0 bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300 will-change-[transform,opacity]"
+      >
+        <div className="flex items-start gap-3">
+          <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
+          <div>
+            <h4 className="font-bold text-gray-200 text-lg">{item.title}</h4>
+            <p className="text-gray-400 text-sm mt-1">{item.subtitle}</p>
+            <p className="text-gray-400 mt-3">{item.text}</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <SectionWrapper id="experience">
@@ -77,12 +89,7 @@ const ExperienceSection = () => {
         <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full" />
       </div>
 
-      <div ref={timelineRef} className="relative">
-        {/* Timeline line */}
-        <div className="absolute left-0 lg:left-1/2 top-0 bottom-0 w-px bg-gray-800 lg:-translate-x-px hidden lg:block">
-          <div className="timeline-line-fill absolute inset-0 bg-gradient-to-b from-gray-500 to-gray-300 origin-top" />
-        </div>
-
+      <div className="timeline-container relative">
         <div className="space-y-12 max-w-3xl mx-auto">
           {/* Experience */}
           <div className="space-y-6">
@@ -98,7 +105,7 @@ const ExperienceSection = () => {
                   Experience
                 </h3>
                 {experiences.map((item, i) => (
-                  <TimelineCard key={i} item={item} index={i} />
+                  <TimelineCard key={i} item={item} />
                 ))}
               </div>
             </div>
@@ -120,7 +127,7 @@ const ExperienceSection = () => {
                   Education
                 </h3>
                 {education.map((item, i) => (
-                  <TimelineCard key={i} item={item} index={i + experiences.length} />
+                  <TimelineCard key={i} item={item} />
                 ))}
               </div>
             </div>
@@ -131,7 +138,7 @@ const ExperienceSection = () => {
         <div className="pt-12 text-center">
           <button
             onClick={handleDownloadResume}
-            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-600 text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black transition-all duration-300"
+            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-600 text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black transition-all duration-300 cursor-pointer"
           >
             <Download className="w-6 h-6" />
             Download Resume

@@ -1,6 +1,6 @@
 import { ExternalLink, Github, Code, Star } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
-import useInView from '../hooks/useInView';
+import useGsapReveal from '../hooks/useGsapReveal';
 
 import pharmaImg from '../assets/Screenshot 2025-12-30 204444.png';
 import pollsenseimg from '../assets/Screenshot 2025-09-04 004121.png';
@@ -9,9 +9,6 @@ import Buildbazarimg from '../assets/Screenshot 2025-12-30 210813.png';
 import portfolioimg from '../assets/Screenshot 2025-12-30 211557.png';
 
 const ProjectsSection = () => {
-  const [featuredRef, featuredInView] = useInView({ threshold: 0.1 });
-  const [allRef, allInView] = useInView({ threshold: 0.1 });
-
   const projects = [
     {
       id: 1,
@@ -65,6 +62,19 @@ const ProjectsSection = () => {
     },
   ];
 
+  // GSAP scroll reveals for featured and all projects grids
+  const featuredRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.12,
+    scrollTriggerOptions: { start: 'top 85%' }
+  });
+
+  const allRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.08,
+    scrollTriggerOptions: { start: 'top 85%' }
+  });
+
   const scrollTo = (target) => {
     const el = document.querySelector(target);
     if (el) {
@@ -91,17 +101,16 @@ const ProjectsSection = () => {
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-16" ref={featuredRef}>
+        <div className="mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Star className="w-8 h-8 text-gray-400 mr-3" />
             Featured Projects
           </h3>
-          <div className="grid lg:grid-cols-2 gap-8">
-            {projects.filter(p => p.featured).map((project, idx) => (
+          <div ref={featuredRef} className="grid lg:grid-cols-2 gap-8">
+            {projects.filter(p => p.featured).map((project) => (
               <div
                 key={project.id}
-                className={`fade-up ${featuredInView ? 'is-visible' : ''} group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer`}
-                style={{ '--delay': idx }}
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer will-change-[transform,opacity]"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-64 overflow-hidden">
@@ -155,17 +164,16 @@ const ProjectsSection = () => {
         </div>
 
         {/* All Projects */}
-        <div ref={allRef}>
+        <div>
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Code className="w-8 h-8 text-gray-400 mr-3" />
             All Projects
           </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, idx) => (
+          <div ref={allRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
               <div
                 key={project.id}
-                className={`fade-up ${allInView ? 'is-visible' : ''} group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer`}
-                style={{ '--delay': idx }}
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer will-change-[transform,opacity]"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-48 overflow-hidden">
@@ -232,7 +240,7 @@ const ProjectsSection = () => {
             </p>
             <button
               onClick={() => scrollTo('#contact')}
-              className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-colors duration-300 shadow-xl"
+              className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-colors duration-300 shadow-xl cursor-pointer"
             >
               Get In Touch
             </button>
