@@ -1,9 +1,13 @@
+import React from 'react';
 import { ArrowRight, Download, Code, Palette, Zap, GitBranch, Star } from 'lucide-react';
 import useGsapTimeline from '../hooks/useGsapTimeline';
+import useIsMobile from '../hooks/useIsMobile';
 
 const Sahil_Bagga_image = '/profile.jpg';
 
 const HeroSection = () => {
+  const isMobile = useIsMobile();
+
   const skills = [
     { icon: <Code className="w-6 h-6" />, label: 'Mern Stack Development', level: 'Advanced', stars: 5 },
     { icon: <Palette className="w-6 h-6" />, label: 'Generative AI', level: 'Intermediate', stars: 4 },
@@ -132,7 +136,7 @@ const HeroSection = () => {
                 {skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="hero-skill-card group bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20 will-change-[transform,opacity]"
+                    className="hero-skill-card group bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 hover:bg-gray-800/80 hover:border-gray-600/80 transition-colors duration-300 shadow-lg"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
@@ -159,7 +163,7 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => scrollTo('#projects')}
-                className="hero-cta-btn group bg-gradient-to-r from-gray-200 to-white hover:from-white hover:to-gray-100 text-black px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl shadow-gray-800/50 hover:shadow-gray-700/60 will-change-[transform,opacity]"
+                className="hero-cta-btn group bg-gradient-to-r from-gray-200 to-white hover:from-white hover:to-gray-100 text-black px-10 py-5 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl shadow-gray-800/50"
               >
                 <span>View Projects</span>
                 <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
@@ -167,7 +171,7 @@ const HeroSection = () => {
 
               <button
                 onClick={handleDownloadResume}
-                className="hero-cta-btn group bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700/60 hover:border-gray-600/80 text-gray-200 hover:text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-gray-800/90 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl hover:shadow-2xl hover:shadow-gray-700/20 will-change-[transform,opacity]"
+                className="hero-cta-btn group bg-gray-900/80 backdrop-blur-sm border-2 border-gray-700/60 hover:border-gray-600/80 text-gray-200 hover:text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-gray-800/90 transition-all duration-300 flex items-center justify-center space-x-3 shadow-xl"
               >
                 <Download className="w-6 h-6" />
                 <span>Download Resume</span>
@@ -178,21 +182,22 @@ const HeroSection = () => {
           {/* Right Column - Profile Section */}
           <div className="hero-image-col">
             <div className="relative">
-              {/* Floating decorative elements */}
-              <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-r from-gray-500/30 to-gray-600/20 rounded-full blur-xl opacity-60 animate-bounce"></div>
-              <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-gradient-to-r from-gray-600/20 to-gray-700/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+              {/* Floating decorative elements — disabled on mobile (animate-bounce/pulse trigger layout) */}
+              {!isMobile && (
+                <>
+                  <div className="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-r from-gray-500/30 to-gray-600/20 rounded-full blur-xl opacity-60 animate-bounce"></div>
+                  <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-gradient-to-r from-gray-600/20 to-gray-700/15 rounded-full blur-xl opacity-40 animate-pulse"></div>
+                </>
+              )}
 
-              <div className="hero-image-container relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-700/50 shadow-2xl shadow-gray-900/40 mx-auto mt-10 lg:mt-0 will-change-[transform,opacity]">
+              {/* Flattened hero image container (7 levels → 4 levels) */}
+              <div className="hero-image-container relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-700/50 shadow-2xl shadow-gray-900/40 mx-auto mt-10 lg:mt-0">
                 <div className="aspect-square bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700 rounded-3xl p-2 shadow-xl">
-                  <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl flex items-center justify-center overflow-hidden border-4 border-gray-700/50">
-                    <div className="w-full h-full bg-gradient-to-br from-gray-800/50 to-gray-900/50 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full mx-auto mb-6 flex items-center justify-center shadow-2xl border-4 border-gray-700/50 overflow-hidden">
-                          <img src={Sahil_Bagga_image} alt="Sahil Bagga" className="w-full h-full object-cover" loading="eager" />
-                        </div>
-                        <p className="text-gray-200 text-3xl sm:text-4xl md:text-6xl font-semibold">Sahil Bagga</p>
-                      </div>
+                  <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl flex flex-col items-center justify-center overflow-hidden border-4 border-gray-700/50 p-4">
+                    <div className="w-48 h-48 md:w-64 md:h-64 bg-gradient-to-r from-gray-600 to-gray-500 rounded-full mb-6 flex items-center justify-center shadow-2xl border-4 border-gray-700/50 overflow-hidden">
+                      <img src={Sahil_Bagga_image} alt="Sahil Bagga" className="w-full h-full object-cover" loading="eager" />
                     </div>
+                    <p className="text-gray-200 text-3xl sm:text-4xl md:text-6xl font-semibold">Sahil Bagga</p>
                   </div>
                 </div>
               </div>
@@ -204,4 +209,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);

@@ -1,3 +1,4 @@
+import React from 'react';
 import { GraduationCap, Award, ExternalLink } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import AchievementHighlightCard from '../components/AchievementHighlightCard';
@@ -11,12 +12,14 @@ import oracleDataPlatform from '../assets/oracle data platform.jpeg';
 import oracleAiFoundation from '../assets/oracle ai foundation associate.png';
 import oracleFoundationsAssociate from '../assets/oracle foundations associate.png';
 
-const CertificationCard = ({ title, issuer, image }) => (
-  <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20 will-change-[transform,opacity]">
+const CertificationCard = React.memo(({ title, issuer, image }) => (
+  <div className="certification-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20">
     <div className="relative h-44 sm:h-52 overflow-hidden bg-gray-800/50">
       <img
         src={image}
         alt={title}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -35,7 +38,7 @@ const CertificationCard = ({ title, issuer, image }) => (
       </a>
     </div>
   </div>
-);
+));
 
 const AchievementsSection = () => {
   // Staggered reveals for grids
@@ -106,12 +109,7 @@ const AchievementsSection = () => {
           </h3>
           <div ref={achievementsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {achievements.map((achievement, index) => (
-              <div
-                key={index}
-                className="will-change-[transform,opacity]"
-              >
-                <AchievementHighlightCard {...achievement} />
-              </div>
+              <AchievementHighlightCard key={index} {...achievement} />
             ))}
           </div>
         </div>
@@ -124,12 +122,7 @@ const AchievementsSection = () => {
           </h3>
           <div ref={certsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {certifications.map((certification) => (
-              <div
-                key={certification.title}
-                className="will-change-[transform,opacity]"
-              >
-                <CertificationCard {...certification} />
-              </div>
+              <CertificationCard key={certification.title} {...certification} />
             ))}
           </div>
         </div>
@@ -138,4 +131,4 @@ const AchievementsSection = () => {
   );
 };
 
-export default AchievementsSection;
+export default React.memo(AchievementsSection);

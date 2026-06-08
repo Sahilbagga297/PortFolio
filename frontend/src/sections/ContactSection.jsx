@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
 
@@ -100,7 +100,7 @@ const ContactSection = () => {
       <div className="flex items-center justify-center">
         <div
           ref={formRef}
-          className="relative w-full max-w-lg will-change-[transform,opacity]"
+          className="relative w-full max-w-lg"
         >
           <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-gray-700/50"></div>
           <div className="relative p-6 sm:p-12">
@@ -256,4 +256,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export default React.memo(ContactSection);

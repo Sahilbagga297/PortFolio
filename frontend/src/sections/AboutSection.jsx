@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
 import gsap from 'gsap';
 
@@ -101,7 +101,7 @@ const AboutSection = () => {
   }, [activeCategory]);
 
   const SkillBar = ({ skill }) => (
-    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] border border-gray-700/50 will-change-[transform,opacity]">
+    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-colors duration-300 hover:shadow-lg border border-gray-700/50">
       <div className="flex items-center">
         <span className="font-semibold text-gray-200">{skill.name}</span>
       </div>
@@ -233,4 +233,4 @@ const AboutSection = () => {
   );
 };
 
-export default AboutSection;
+export default React.memo(AboutSection);

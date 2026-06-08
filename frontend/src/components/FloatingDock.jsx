@@ -1,3 +1,4 @@
+import React from 'react';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -90,4 +91,4 @@ const FloatingDock = () => {
   );
 };
 
-export default FloatingDock;
+export default React.memo(FloatingDock);

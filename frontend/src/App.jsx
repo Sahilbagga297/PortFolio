@@ -1,13 +1,20 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, lazy, Suspense } from 'react';
 import './App.css';
 import Layout from './components/Layout.jsx';
 import Preloader from './components/Preloader.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import AboutSection from './sections/AboutSection.jsx';
 import ExperienceSection from './sections/ExperienceSection.jsx';
-import ProjectsSection from './sections/ProjectsSection.jsx';
-import AchievementsSection from './sections/AchievementsSection.jsx';
-import ContactSection from './sections/ContactSection.jsx';
+
+// Lazy-load below-the-fold sections to reduce initial JS parse/eval
+const ProjectsSection = lazy(() => import('./sections/ProjectsSection.jsx'));
+const AchievementsSection = lazy(() => import('./sections/AchievementsSection.jsx'));
+const ContactSection = lazy(() => import('./sections/ContactSection.jsx'));
+
+// Invisible fallback that preserves layout space to prevent CLS
+const SectionFallback = () => (
+  <div style={{ minHeight: '400px' }} aria-hidden="true" />
+);
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,19 +56,25 @@ const App = () => {
             <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
           </div>
 
-          <ProjectsSection />
+          <Suspense fallback={<SectionFallback />}>
+            <ProjectsSection />
+          </Suspense>
 
           <div className="max-w-7xl mx-auto px-6">
             <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
           </div>
 
-          <AchievementsSection />
+          <Suspense fallback={<SectionFallback />}>
+            <AchievementsSection />
+          </Suspense>
 
           <div className="max-w-7xl mx-auto px-6">
             <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
           </div>
 
-          <ContactSection />
+          <Suspense fallback={<SectionFallback />}>
+            <ContactSection />
+          </Suspense>
         </Layout>
       </div>
     </>

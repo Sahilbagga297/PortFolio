@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Coffee } from 'lucide-react';
 import useScrollSpy from '../hooks/useScrollSpy';
 import gsap from 'gsap';
@@ -8,6 +8,7 @@ const SECTION_IDS = ['home', 'about', 'experience', 'projects', 'achievements', 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolledRef = useRef(false);
   const activeSection = useScrollSpy(SECTION_IDS, { offset: 100 });
 
   useEffect(() => {
@@ -26,12 +27,27 @@ const Navbar = () => {
     { name: 'Contact', target: '#contact' },
   ];
 
+  // Throttled scroll handler — only triggers setState when value actually changes
   useEffect(() => {
+    let rafId = null;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 50;
+        if (scrolled !== isScrolledRef.current) {
+          isScrolledRef.current = scrolled;
+          setIsScrolled(scrolled);
+        }
+        rafId = null;
+      });
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const handleNavClick = useCallback((target) => {
@@ -143,4 +159,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default React.memo(Navbar);

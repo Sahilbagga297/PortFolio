@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const ScrollProgress = () => {
   const progressRef = useRef(null);
@@ -44,4 +44,4 @@ const ScrollProgress = () => {
   );
 };
 
-export default ScrollProgress;
+export default React.memo(ScrollProgress);

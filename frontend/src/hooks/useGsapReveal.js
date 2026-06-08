@@ -31,6 +31,9 @@ const useGsapReveal = (options = {}) => {
     const element = elementRef.current;
     if (!element) return;
 
+    // Short-circuit: no animation requested (e.g. SectionWrapper with noAnimation)
+    if (animation === 'none') return;
+
     // Check user's preferences for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {

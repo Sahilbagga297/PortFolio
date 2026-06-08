@@ -6,10 +6,6 @@ body,
   width: 100%;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   overflow-x: hidden;
   min-height: 100vh;
@@ -121,17 +117,9 @@ body {
   100% { opacity: 0; transform: scale(0.95); }
 }
 
-/* ===== Timeline line fill (Handled via GSAP ScrollTrigger for cross-browser 60FPS compatibility) ===== */
+/* ===== Timeline line fill ===== */
 .timeline-line-fill {
   transform-origin: top;
-  will-change: transform;
-}
-
-/* Optimized hardware acceleration utilities */
-.gpu-accelerated {
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
 }
 
 /* ===== Scroll progress bar ===== */
@@ -149,6 +137,33 @@ body {
   .scroll-progress-bar {
     animation: none;
     /* JS fallback will set scaleX via inline style */
+  }
+}
+
+/* ===== CSS Containment for scroll performance ===== */
+.section-contain {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* ===== Mobile Performance: Disable backdrop-blur below 768px ===== */
+@media (max-width: 767px) {
+  /* backdrop-blur is the #1 mobile paint cost — each blurred element creates a
+     separate compositor layer and re-rasterizes every frame during scroll.
+     Solid opaque backgrounds are visually identical at mobile sizes. */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Disable continuous CSS keyframe animations on mobile */
+  .layout-orb {
+    animation: none !important;
   }
 }
 

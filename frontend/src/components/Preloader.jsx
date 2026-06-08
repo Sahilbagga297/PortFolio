@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Preloader = ({ onComplete }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -78,4 +78,4 @@ const Preloader = ({ onComplete }) => {
   );
 };
 
-export default Preloader;
+export default React.memo(Preloader);

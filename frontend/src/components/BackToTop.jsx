@@ -1,16 +1,30 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUp } from 'lucide-react';
 
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
+    let rafId = null;
+
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 500);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const visible = window.scrollY > 500;
+        if (visible !== isVisibleRef.current) {
+          isVisibleRef.current = visible;
+          setIsVisible(visible);
+        }
+        rafId = null;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -32,4 +46,4 @@ const BackToTop = () => {
   );
 };
 
-export default BackToTop;
+export default React.memo(BackToTop);

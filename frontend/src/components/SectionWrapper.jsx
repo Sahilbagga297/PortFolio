@@ -1,3 +1,4 @@
+import React from 'react';
 import useGsapReveal from '../hooks/useGsapReveal';
 
 const SectionWrapper = ({ id, className = '', children, noAnimation = false }) => {
@@ -14,7 +15,7 @@ const SectionWrapper = ({ id, className = '', children, noAnimation = false }) =
     <section
       id={id}
       ref={noAnimation ? null : ref}
-      className={`relative px-4 sm:px-6 lg:px-8 py-16 sm:py-24 ${className}`}
+      className={`relative px-4 sm:px-6 lg:px-8 py-16 sm:py-24 section-contain ${className}`}
     >
       <div className="max-w-7xl mx-auto">
         {children}
@@ -23,4 +24,4 @@ const SectionWrapper = ({ id, className = '', children, noAnimation = false }) =
   );
 };
 
-export default SectionWrapper;
+export default React.memo(SectionWrapper);

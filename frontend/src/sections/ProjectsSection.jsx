@@ -1,3 +1,4 @@
+import React from 'react';
 import { ExternalLink, Github, Code, Star } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
@@ -110,7 +111,7 @@ const ProjectsSection = () => {
             {projects.filter(p => p.featured).map((project) => (
               <div
                 key={project.id}
-                className="group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer will-change-[transform,opacity]"
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-64 overflow-hidden">
@@ -173,7 +174,7 @@ const ProjectsSection = () => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer will-change-[transform,opacity]"
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-48 overflow-hidden">
@@ -251,4 +252,4 @@ const ProjectsSection = () => {
   );
 };
 
-export default ProjectsSection;
+export default React.memo(ProjectsSection);

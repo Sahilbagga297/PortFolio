@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { Download } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
-import gsap from 'gsap';
 
 const ExperienceSection = () => {
   const handleDownloadResume = () => {
@@ -51,33 +50,34 @@ const ExperienceSection = () => {
     },
   ];
 
+  // Container-level stagger animation — single ScrollTrigger for all experience cards
+  const experienceContainerRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.1,
+    duration: 0.6,
+    scrollTriggerOptions: { start: 'top 88%' }
+  });
 
+  // Container-level stagger animation — single ScrollTrigger for all education cards
+  const educationContainerRef = useGsapReveal({
+    animation: 'stagger-children',
+    stagger: 0.1,
+    duration: 0.6,
+    scrollTriggerOptions: { start: 'top 88%' }
+  });
 
-  const TimelineCard = ({ item }) => {
-    const cardRef = useGsapReveal({
-      animation: 'fade-up',
-      duration: 0.6,
-      scrollTriggerOptions: {
-        start: 'top 90%'
-      }
-    });
-
-    return (
-      <div
-        ref={cardRef}
-        className="opacity-0 bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300 will-change-[transform,opacity]"
-      >
-        <div className="flex items-start gap-3">
-          <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
-          <div>
-            <h4 className="font-bold text-gray-200 text-lg">{item.title}</h4>
-            <p className="text-gray-400 text-sm mt-1">{item.subtitle}</p>
-            <p className="text-gray-400 mt-3">{item.text}</p>
-          </div>
+  const TimelineCard = ({ item }) => (
+    <div className="bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-colors duration-300">
+      <div className="flex items-start gap-3">
+        <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
+        <div>
+          <h4 className="font-bold text-gray-200 text-lg">{item.title}</h4>
+          <p className="text-gray-400 text-sm mt-1">{item.subtitle}</p>
+          <p className="text-gray-400 mt-3">{item.text}</p>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
     <SectionWrapper id="experience">
@@ -104,9 +104,11 @@ const ExperienceSection = () => {
                   </div>
                   Experience
                 </h3>
-                {experiences.map((item, i) => (
-                  <TimelineCard key={i} item={item} />
-                ))}
+                <div ref={experienceContainerRef} className="space-y-4">
+                  {experiences.map((item, i) => (
+                    <TimelineCard key={i} item={item} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -126,9 +128,11 @@ const ExperienceSection = () => {
                   </div>
                   Education
                 </h3>
-                {education.map((item, i) => (
-                  <TimelineCard key={i} item={item} />
-                ))}
+                <div ref={educationContainerRef} className="space-y-4">
+                  {education.map((item, i) => (
+                    <TimelineCard key={i} item={item} />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -149,4 +153,4 @@ const ExperienceSection = () => {
   );
 };
 
-export default ExperienceSection;
+export default React.memo(ExperienceSection);

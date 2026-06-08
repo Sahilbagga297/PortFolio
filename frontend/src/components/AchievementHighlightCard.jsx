@@ -1,3 +1,5 @@
+import React from 'react';
+
 const AchievementHighlightCard = ({ icon: Icon, number, label, detail }) => (
   <div className="achievement-card group relative overflow-hidden bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 sm:p-5 hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-gray-700/20">
     <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-gray-600/10 to-gray-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -20,4 +22,4 @@ const AchievementHighlightCard = ({ icon: Icon, number, label, detail }) => (
   </div>
 );
 
-export default AchievementHighlightCard;
+export default React.memo(AchievementHighlightCard);
