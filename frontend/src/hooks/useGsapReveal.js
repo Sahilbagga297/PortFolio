@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
  * Automatically respects motion preferences and optimizes animations for low-end mobile hardware.
  * 
  * @param {Object} options Configuration parameters.
- * @param {string} options.animation Animation type ('fade-up', 'slide-in-left', 'slide-in-right', 'scale-in', 'stagger-children').
+ * @param {string} options.animation Animation type ('fade-up', 'slide-in-left', 'slide-in-right', 'scale-in', 'stagger-children', 'blur-in', 'rotate-in', 'clip-reveal', 'stagger-scale').
  * @param {number} options.duration Animation duration in seconds (default: 0.8).
  * @param {number} options.delay Animation start delay in seconds (default: 0).
  * @param {number} options.stagger Stagger duration for child elements (default: 0.12).
@@ -38,7 +38,7 @@ const useGsapReveal = (options = {}) => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       // Instantly reveal element
-      gsap.set(element, { opacity: 1, visibility: 'visible', y: 0, x: 0, scale: 1 });
+      gsap.set(element, { opacity: 1, visibility: 'visible', y: 0, x: 0, scale: 1, filter: 'none', clipPath: 'none' });
       return;
     }
 
@@ -124,6 +124,87 @@ const useGsapReveal = (options = {}) => {
             delay,
             stagger,
             ease: 'power2.out',
+            scrollTrigger: triggerSettings,
+          });
+        }
+      } else if (animation === 'blur-in') {
+        // Elegant blur-to-sharp reveal
+        gsap.set(element, { opacity: 0, filter: 'blur(12px)', y: 15 });
+        gsap.to(element, {
+          opacity: 1,
+          filter: 'blur(0px)',
+          y: 0,
+          duration: duration * 1.2,
+          delay,
+          ease: 'power3.out',
+          scrollTrigger: triggerSettings,
+        });
+      } else if (animation === 'rotate-in') {
+        // Subtle 3D rotation reveal
+        gsap.set(element, { opacity: 0, rotateX: 15, y: 30, transformPerspective: 800 });
+        gsap.to(element, {
+          opacity: 1,
+          rotateX: 0,
+          y: 0,
+          duration: duration * 1.1,
+          delay,
+          ease: 'power3.out',
+          scrollTrigger: triggerSettings,
+        });
+      } else if (animation === 'clip-reveal') {
+        // Clip-path wipe reveal (left to right)
+        gsap.set(element, { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
+        gsap.to(element, {
+          clipPath: 'inset(0 0% 0 0)',
+          duration: duration * 1.3,
+          delay,
+          ease: 'power4.inOut',
+          scrollTrigger: triggerSettings,
+        });
+      } else if (animation === 'stagger-scale') {
+        // Scale-up stagger for cards/grids
+        const children = element.children;
+        if (children.length > 0) {
+          gsap.set(children, { opacity: 0, scale: 0.85, y: 20 });
+          gsap.to(children, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: duration * 0.9,
+            delay,
+            stagger,
+            ease: 'back.out(1.2)',
+            scrollTrigger: triggerSettings,
+          });
+        }
+      } else if (animation === 'stagger-slide-left') {
+        // Stagger children sliding in from the left
+        const children = element.children;
+        if (children.length > 0) {
+          gsap.set(children, { opacity: 0, x: -40 });
+          gsap.to(children, {
+            opacity: 1,
+            x: 0,
+            duration,
+            delay,
+            stagger,
+            ease: 'power3.out',
+            scrollTrigger: triggerSettings,
+          });
+        }
+      } else if (animation === 'stagger-blur') {
+        // Stagger children with blur reveal
+        const children = element.children;
+        if (children.length > 0) {
+          gsap.set(children, { opacity: 0, filter: 'blur(8px)', y: 15 });
+          gsap.to(children, {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            duration: duration * 1.1,
+            delay,
+            stagger,
+            ease: 'power3.out',
             scrollTrigger: triggerSettings,
           });
         }

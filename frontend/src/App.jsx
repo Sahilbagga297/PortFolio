@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, lazy, Suspense } from 'react';
 import './App.css';
 import Layout from './components/Layout.jsx';
 import Preloader from './components/Preloader.jsx';
+import AnimatedDivider from './components/AnimatedDivider.jsx';
 import HeroSection from './sections/HeroSection.jsx';
 import AboutSection from './sections/AboutSection.jsx';
 import ExperienceSection from './sections/ExperienceSection.jsx';
@@ -39,38 +40,28 @@ const App = () => {
         <Layout>
           <HeroSection />
 
-          {/* Section separator */}
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-          </div>
+          {/* Animated section separators */}
+          <AnimatedDivider />
 
           <AboutSection />
 
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-          </div>
+          <AnimatedDivider />
 
           <ExperienceSection />
 
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-          </div>
+          <AnimatedDivider />
 
           <Suspense fallback={<SectionFallback />}>
             <ProjectsSection />
           </Suspense>
 
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-          </div>
+          <AnimatedDivider />
 
           <Suspense fallback={<SectionFallback />}>
             <AchievementsSection />
           </Suspense>
 
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
-          </div>
+          <AnimatedDivider />
 
           <Suspense fallback={<SectionFallback />}>
             <ContactSection />

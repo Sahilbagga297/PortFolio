@@ -2,6 +2,7 @@ import React from 'react';
 import { ExternalLink, Github, Code, Star } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
+import useTextReveal from '../hooks/useTextReveal';
 
 import pharmaImg from '../assets/Screenshot 2025-12-30 204444.png';
 import pollsenseimg from '../assets/Screenshot 2025-09-04 004121.png';
@@ -63,18 +64,27 @@ const ProjectsSection = () => {
     },
   ];
 
-  // GSAP scroll reveals for featured and all projects grids
+  // Text reveal on heading
+  const titleRef = useTextReveal({ splitBy: 'chars', stagger: 0.025, from: 'blur' });
+
+  // Stagger-scale for featured projects — bouncy entrance
   const featuredRef = useGsapReveal({
-    animation: 'stagger-children',
-    stagger: 0.12,
+    animation: 'stagger-scale',
+    stagger: 0.15,
+    duration: 0.7,
     scrollTriggerOptions: { start: 'top 85%' }
   });
 
+  // Stagger-blur for all projects grid
   const allRef = useGsapReveal({
-    animation: 'stagger-children',
+    animation: 'stagger-blur',
     stagger: 0.08,
+    duration: 0.6,
     scrollTriggerOptions: { start: 'top 85%' }
   });
+
+  // Rotate-in for CTA section
+  const ctaRef = useGsapReveal({ animation: 'rotate-in', duration: 0.9 });
 
   const scrollTo = (target) => {
     const el = document.querySelector(target);
@@ -88,10 +98,15 @@ const ProjectsSection = () => {
   return (
     <SectionWrapper id="projects" noAnimation>
       <div>
-        {/* Header */}
+        {/* Header with text reveal */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-6">
-            <span className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">Projects</span>
+            <span
+              ref={titleRef}
+              className="bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent"
+            >
+              Projects
+            </span>
           </h2>
           <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto">
             A collection of my recent projects showcasing problem-solving skills and modern web development practices.
@@ -101,7 +116,7 @@ const ProjectsSection = () => {
           </p>
         </div>
 
-        {/* Featured Projects */}
+        {/* Featured Projects — stagger-scale */}
         <div className="mb-16">
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Star className="w-8 h-8 text-gray-400 mr-3" />
@@ -111,12 +126,12 @@ const ProjectsSection = () => {
             {projects.filter(p => p.featured).map((project) => (
               <div
                 key={project.id}
-                className="group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl hover:shadow-gray-800/30 transition-all duration-500 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer hover:-translate-y-1"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-64 overflow-hidden">
                   <div
-                    className="w-full h-full bg-center bg-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     style={{ backgroundImage: `url(${project.image})` }}
                     role="img"
                     aria-label={project.title}
@@ -164,7 +179,7 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* All Projects */}
+        {/* All Projects — stagger-blur */}
         <div>
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Code className="w-8 h-8 text-gray-400 mr-3" />
@@ -174,12 +189,12 @@ const ProjectsSection = () => {
             {projects.map((project) => (
               <div
                 key={project.id}
-                className="group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer"
+                className="group bg-gray-900/60 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl hover:shadow-gray-800/20 transition-all duration-500 overflow-hidden border border-gray-700/50 hover:border-gray-500/50 cursor-pointer hover:-translate-y-1"
                 onClick={() => window.open(project.live, '_blank')}
               >
                 <div className="relative h-48 overflow-hidden">
                   <div
-                    className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full bg-center bg-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     style={{ backgroundImage: `url(${project.image})` }}
                     role="img"
                     aria-label={project.title}
@@ -232,8 +247,8 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-t border-gray-800 rounded-3xl p-10">
+        {/* CTA — rotate-in */}
+        <div ref={ctaRef} className="mt-16 bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-t border-gray-800 rounded-3xl p-10">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Start a Project?</h3>
             <p className="text-gray-400 mb-8 text-lg">
@@ -241,7 +256,7 @@ const ProjectsSection = () => {
             </p>
             <button
               onClick={() => scrollTo('#contact')}
-              className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-colors duration-300 shadow-xl cursor-pointer"
+              className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-200 transition-all duration-300 shadow-xl cursor-pointer hover:scale-105 hover:shadow-2xl"
             >
               Get In Touch
             </button>

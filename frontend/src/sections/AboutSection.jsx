@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
+import useGsapReveal from '../hooks/useGsapReveal';
+import useTextReveal from '../hooks/useTextReveal';
 import gsap from 'gsap';
 
 const AboutSection = () => {
@@ -69,6 +71,26 @@ const AboutSection = () => {
     return Object.values(technicalSkills).flat().filter(skill => skill.category === activeCategory);
   };
 
+  // Scroll-triggered text reveal on the section title
+  const titleRef = useTextReveal({ splitBy: 'chars', stagger: 0.03, from: 'blur' });
+
+  // Blur-in animation for the bio card
+  const bioRef = useGsapReveal({ animation: 'blur-in', duration: 0.9 });
+
+  // Rotate-in for the tech stack card
+  const techRef = useGsapReveal({ animation: 'rotate-in', duration: 0.9, scrollTriggerOptions: { start: 'top 85%' } });
+
+  // Stagger-blur for soft skills
+  const softSkillsRef = useGsapReveal({
+    animation: 'stagger-blur',
+    stagger: 0.08,
+    duration: 0.6,
+    scrollTriggerOptions: { start: 'top 85%' }
+  });
+
+  // Scale-in for "Beyond the Code"
+  const beyondRef = useGsapReveal({ animation: 'scale-in', duration: 0.8 });
+
   // Stagger reveal animation whenever activeCategory updates
   useEffect(() => {
     if (skillsContainerRef.current) {
@@ -90,10 +112,10 @@ const AboutSection = () => {
             { opacity: 1, duration: 0.35, stagger: 0.03, ease: 'sine.out' }
           );
         } else {
-          // Premium slide-up stagger animation
+          // Premium scale-up stagger with bounce
           gsap.fromTo(cards,
-            { opacity: 0, y: 15 },
-            { opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'power2.out' }
+            { opacity: 0, y: 20, scale: 0.9 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.05, ease: 'back.out(1.2)' }
           );
         }
       }
@@ -101,7 +123,7 @@ const AboutSection = () => {
   }, [activeCategory]);
 
   const SkillBar = ({ skill }) => (
-    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-colors duration-300 hover:shadow-lg border border-gray-700/50">
+    <div className="skill-card bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 hover:bg-gray-700/80 transition-all duration-300 hover:shadow-lg hover:shadow-gray-800/20 hover:-translate-y-0.5 border border-gray-700/50">
       <div className="flex items-center">
         <span className="font-semibold text-gray-200">{skill.name}</span>
       </div>
@@ -109,17 +131,20 @@ const AboutSection = () => {
   );
 
   return (
-    <SectionWrapper id="about">
-      {/* Header */}
+    <SectionWrapper id="about" noAnimation>
+      {/* Header with text reveal animation */}
       <div className="text-center mb-16">
-        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4">
+        <h2
+          ref={titleRef}
+          className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4"
+        >
           About Me
         </h2>
         <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full" />
       </div>
 
-      {/* Bio */}
-      <div className="relative mb-16">
+      {/* Bio — blur-in */}
+      <div ref={bioRef} className="relative mb-16">
         <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
         <div className="relative p-6 sm:p-10 space-y-8">
           <h3 className="text-3xl sm:text-4xl font-bold text-gray-200">My Journey & Passion</h3>
@@ -140,8 +165,8 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Technical Skills & Tech Stack */}
-      <div className="relative mb-16">
+      {/* Technical Skills & Tech Stack — rotate-in */}
+      <div ref={techRef} className="relative mb-16">
         <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
         <div className="relative p-6 sm:p-10 space-y-8">
           <div className="text-center mb-8">
@@ -162,8 +187,8 @@ const AboutSection = () => {
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${activeCategory === category.id
-                  ? 'bg-gradient-to-r from-gray-200 to-white text-black shadow-lg'
-                  : 'bg-gray-800/60 backdrop-blur-sm text-gray-400 hover:bg-gray-700/80 border border-gray-700/50'
+                  ? 'bg-gradient-to-r from-gray-200 to-white text-black shadow-lg scale-105'
+                  : 'bg-gray-800/60 backdrop-blur-sm text-gray-400 hover:bg-gray-700/80 border border-gray-700/50 hover:scale-[1.02]'
                   }`}
               >
                 {category.name}
@@ -202,14 +227,14 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Soft Skills */}
+      {/* Soft Skills — stagger-blur */}
       <div className="relative mb-16">
         <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
         <div className="relative p-6 sm:p-10 space-y-8">
           <h3 className="text-3xl sm:text-4xl font-bold text-gray-200">Soft Skills</h3>
-          <div className="space-y-3">
+          <div ref={softSkillsRef} className="space-y-3">
             {softSkillsData.map(([k, v], i) => (
-              <div key={i} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/30">
+              <div key={i} className="bg-gray-800/50 rounded-xl p-4 border border-gray-700/30 hover:bg-gray-800/70 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-800/20">
                 <div className="font-semibold text-gray-200">{k}</div>
                 <div className="text-gray-400">{v}</div>
               </div>
@@ -218,8 +243,8 @@ const AboutSection = () => {
         </div>
       </div>
 
-      {/* Beyond the Code */}
-      <div className="relative">
+      {/* Beyond the Code — scale-in */}
+      <div ref={beyondRef} className="relative">
         <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
         <div className="relative p-6 sm:p-10 space-y-8">
           <h3 className="text-3xl sm:text-4xl font-bold text-gray-200">Beyond the Code</h3>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
+import useTextReveal from '../hooks/useTextReveal';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,8 @@ const ContactSection = () => {
     scrollTriggerOptions: { start: 'top 88%' }
   });
 
+  const titleRef = useTextReveal({ splitBy: 'chars', stagger: 0.03, from: 'blur' });
+
   const validateForm = () => {
     const newErrors = {};
     if (!formData.username.trim()) newErrors.username = 'Full name is required';
@@ -35,6 +38,7 @@ const ContactSection = () => {
     if (!formData.message.trim()) newErrors.message = 'Message is required';
     return newErrors;
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,7 +116,7 @@ const ContactSection = () => {
                 </svg>
               </div>
               <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2">
-                Get In Touch
+                <span ref={titleRef}>Get In Touch</span>
               </h2>
               <p className="text-gray-400">Let's start a conversation</p>
               <div className="w-20 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full mt-4"></div>
