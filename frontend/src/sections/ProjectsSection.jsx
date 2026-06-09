@@ -8,6 +8,9 @@ import pollsenseimg from '../assets/Screenshot 2025-09-04 004121.png';
 import nidhisetuimg from '../assets/Screenshot 2025-12-30 210502.png';
 import Buildbazarimg from '../assets/Screenshot 2025-12-30 210813.png';
 import portfolioimg from '../assets/Screenshot 2025-12-30 211557.png';
+import Maintainxaiimg from '../assets/maintain.png';
+import honeypotimg from '../assets/honey.png';
+
 
 const ProjectsSection = () => {
   const projects = [
@@ -61,6 +64,26 @@ const ProjectsSection = () => {
       live: 'https://build-bazaar-x.vercel.app/',
       featured: false,
     },
+    {
+      id: 6,
+      title: 'MaintainX AI',
+      description: 'A full stack web application developed for the purpose of AI based maintenance prediction and management.',
+      technologies: ['React', 'Nodejs', 'MongoDB', 'Express', 'JavaScript' , 'Gsap'],
+      image: Maintainxaiimg,
+      github: 'https://github.com/Sahilbagga297/MachineModel',
+      live: 'https://machine-model-9jrd.vercel.app/',
+      featured: false,
+    },
+    {
+      id: 7,
+      title: 'HoneyPot AI',
+      description: 'A full stack web application built with the motive of preventing financial frauds by detecting the financial frauds in early stages and finding out the details of the scammer.',
+      technologies: ['React', 'Nodejs', 'MongoDB', 'Express', 'Scikit-learn', 'Python'],
+      image: honeypotimg,
+      github: 'https://github.com/Sahilbagga297/honeypot',
+      live: 'https://1-bay-omega.vercel.app/',
+      featured: false,
+    }
   ];
 
   // GSAP scroll reveals for featured and all projects grids
