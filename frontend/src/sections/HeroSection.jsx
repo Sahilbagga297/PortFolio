@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArrowRight, Download, Code, Palette, Zap, GitBranch, Star } from 'lucide-react';
 import useGsapTimeline from '../hooks/useGsapTimeline';
-import useParallax from '../hooks/useParallax';
 import useIsMobile from '../hooks/useIsMobile';
 
 const Sahil_Bagga_image = '/profile.jpg';
@@ -35,9 +34,6 @@ const HeroSection = () => {
     }
   };
 
-  // Parallax on the image column (desktop only, auto-disabled on mobile by the hook)
-  const imageParallaxRef = useParallax({ speed: 0.15, direction: 'up' });
-
   // Scoped entrance timeline animation
   const containerRef = useGsapTimeline((tl) => {
     const isLowEndDevice =
@@ -60,35 +56,35 @@ const HeroSection = () => {
       return;
     }
 
-    // Premium high-performance entrance orchestration with enhanced animations
+    // Premium high-performance entrance orchestration
     tl.fromTo('.hero-title-line', 
-      { y: 50, opacity: 0, filter: 'blur(8px)' },
-      { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1, ease: 'power3.out' }
+      { y: 35, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
     )
     .fromTo('.hero-desc',
-      { y: 30, opacity: 0, filter: 'blur(4px)' },
-      { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' },
-      '-=0.6'
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
+      '-=0.5'
     )
     .fromTo('.hero-skills-title',
-      { opacity: 0, x: -20 },
-      { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
-      '-=0.4'
-    )
-    .fromTo('.hero-skill-card',
-      { y: 25, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, stagger: 0.1, duration: 0.6, ease: 'back.out(1.2)' },
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4 },
       '-=0.3'
     )
+    .fromTo('.hero-skill-card',
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, ease: 'power2.out' },
+      '-=0.2'
+    )
     .fromTo('.hero-cta-btn',
-      { y: 20, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, stagger: 0.12, duration: 0.6, ease: 'back.out(1.4)' },
-      '-=0.4'
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: 'power2.out' },
+      '-=0.3'
     )
     .fromTo('.hero-image-container',
-      { scale: 0.9, opacity: 0, rotateY: -8, transformPerspective: 1000 },
-      { scale: 1, opacity: 1, rotateY: 0, duration: 1.2, ease: 'power3.out' },
-      '-=1.4'
+      { scale: 0.95, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.15)' },
+      '-=1.2'
     );
   }, []);
 
@@ -140,7 +136,7 @@ const HeroSection = () => {
                 {skills.map((skill, index) => (
                   <div
                     key={index}
-                    className="hero-skill-card group bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 hover:bg-gray-800/80 hover:border-gray-600/80 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-gray-800/30 hover:-translate-y-0.5"
+                    className="hero-skill-card group bg-gray-900/60 backdrop-blur-sm border border-gray-700/60 rounded-2xl p-4 hover:bg-gray-800/80 hover:border-gray-600/80 transition-colors duration-300 shadow-lg"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
@@ -183,8 +179,8 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Column - Profile Section with Parallax */}
-          <div className="hero-image-col" ref={imageParallaxRef}>
+          {/* Right Column - Profile Section */}
+          <div className="hero-image-col">
             <div className="relative">
               {/* Floating decorative elements — disabled on mobile (animate-bounce/pulse trigger layout) */}
               {!isMobile && (

@@ -4,7 +4,6 @@ import SectionWrapper from '../components/SectionWrapper';
 import AchievementHighlightCard from '../components/AchievementHighlightCard';
 import { achievements } from '../data/achievements';
 import useGsapReveal from '../hooks/useGsapReveal';
-import useTextReveal from '../hooks/useTextReveal';
 
 import awsSolutionsArchitect from '../assets/aws solutions architect.png';
 import awsCloudPractitioner from '../assets/aws cloud practitioner.png';
@@ -42,26 +41,16 @@ const CertificationCard = React.memo(({ title, issuer, image }) => (
 ));
 
 const AchievementsSection = () => {
-  // Text reveal on heading
-  const titlePart1Ref = useTextReveal({ splitBy: 'chars', stagger: 0.02, from: 'blur' });
-  const titlePart2Ref = useTextReveal({ splitBy: 'chars', stagger: 0.02, from: 'blur' });
-
-  // Fade-up reveals for sub-headings
-  const subtitle1Ref = useGsapReveal({ animation: 'fade-up', duration: 0.6 });
-  const subtitle2Ref = useGsapReveal({ animation: 'fade-up', duration: 0.6 });
-
   // Staggered reveals for grids
   const achievementsRef = useGsapReveal({
-    animation: 'stagger-scale',
-    stagger: 0.1,
-    duration: 0.7,
+    animation: 'stagger-children',
+    stagger: 0.08,
     scrollTriggerOptions: { start: 'top 85%' }
   });
 
   const certsRef = useGsapReveal({
-    animation: 'stagger-blur',
-    stagger: 0.08,
-    duration: 0.6,
+    animation: 'stagger-children',
+    stagger: 0.1,
     scrollTriggerOptions: { start: 'top 85%' }
   });
 
@@ -104,11 +93,8 @@ const AchievementsSection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4">
-            <span ref={titlePart1Ref}>Achievements</span>{' '}
-            <span
-              ref={titlePart2Ref}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400"
-            >
+            Achievements{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">
               and Certifications
             </span>
           </h2>
@@ -117,7 +103,7 @@ const AchievementsSection = () => {
 
         {/* Achievements */}
         <div className="mb-16">
-          <h3 ref={subtitle1Ref} className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <Award className="w-8 h-8 text-gray-400 mr-3" />
             Achievements
           </h3>
@@ -130,7 +116,7 @@ const AchievementsSection = () => {
 
         {/* Certifications */}
         <div>
-          <h3 ref={subtitle2Ref} className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center">
             <GraduationCap className="w-8 h-8 text-gray-400 mr-3" />
             Certifications
           </h3>

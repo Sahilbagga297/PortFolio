@@ -80,120 +80,6 @@ body {
   transform: scale(1);
 }
 
-/* ===== NEW: Immersive scroll-triggered animation classes ===== */
-
-/* Blur-in reveal */
-.blur-in {
-  opacity: 0;
-  filter: blur(12px);
-  transform: translateY(15px);
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              filter 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--delay, 0) * 0.12s);
-}
-
-.blur-in.is-visible {
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
-}
-
-/* Rotate-in 3D reveal */
-.rotate-in {
-  opacity: 0;
-  transform: perspective(800px) rotateX(15deg) translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--delay, 0) * 0.12s);
-}
-
-.rotate-in.is-visible {
-  opacity: 1;
-  transform: perspective(800px) rotateX(0deg) translateY(0);
-}
-
-/* Clip-path wipe reveal */
-.clip-reveal {
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
-  transition-delay: calc(var(--delay, 0) * 0.12s);
-}
-
-.clip-reveal.is-visible {
-  clip-path: inset(0 0% 0 0);
-}
-
-/* Glow-pulse for highlighted elements */
-.glow-pulse {
-  animation: glow-pulse-anim 3s ease-in-out infinite;
-}
-
-@keyframes glow-pulse-anim {
-  0%, 100% { box-shadow: 0 0 20px rgba(156, 163, 175, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(156, 163, 175, 0.15), 0 0 80px rgba(156, 163, 175, 0.05); }
-}
-
-/* Gradient line grow animation (for section separators) */
-.gradient-line-grow {
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.gradient-line-grow.is-visible {
-  transform: scaleX(1);
-}
-
-/* Stagger-ready child items — used for JS-driven stagger animations */
-.stagger-item {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.stagger-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Text reveal fragment styling */
-.text-reveal-fragment {
-  overflow: hidden;
-  display: inline-block;
-}
-
-.text-reveal-inner {
-  display: inline-block;
-}
-
-/* Magnetic hover effect for interactive cards */
-.magnetic-hover {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
-
-/* Smooth image parallax container */
-.parallax-container {
-  overflow: hidden;
-}
-
-.parallax-image {
-  will-change: transform;
-}
-
-/* ===== Section separator animation ===== */
-.section-separator-line {
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.section-separator-line.is-visible {
-  transform: scaleX(1);
-}
-
 /* ===== Background float animations ===== */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
@@ -279,26 +165,6 @@ body {
   .layout-orb {
     animation: none !important;
   }
-
-  /* Disable parallax effects on mobile */
-  .parallax-image {
-    transform: none !important;
-  }
-
-  /* Simplify glow-pulse on mobile */
-  .glow-pulse {
-    animation: none !important;
-  }
-
-  /* Simpler blur-in on mobile (filter: blur is expensive) */
-  .blur-in {
-    filter: none;
-    transform: translateY(15px);
-  }
-  .blur-in.is-visible {
-    filter: none;
-    transform: translateY(0);
-  }
 }
 
 /* ===== Reduced motion ===== */
@@ -314,20 +180,9 @@ body {
   .fade-in,
   .slide-in-left,
   .slide-in-right,
-  .scale-in,
-  .blur-in,
-  .rotate-in,
-  .clip-reveal,
-  .stagger-item {
+  .scale-in {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
-    filter: none !important;
-    clip-path: none !important;
-  }
-
-  .gradient-line-grow,
-  .section-separator-line {
-    transform: scaleX(1) !important;
   }
 }

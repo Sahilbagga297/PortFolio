@@ -2,7 +2,6 @@ import React from 'react';
 import { Download } from 'lucide-react';
 import SectionWrapper from '../components/SectionWrapper';
 import useGsapReveal from '../hooks/useGsapReveal';
-import useTextReveal from '../hooks/useTextReveal';
 
 const ExperienceSection = () => {
   const handleDownloadResume = () => {
@@ -51,30 +50,24 @@ const ExperienceSection = () => {
     },
   ];
 
-  // Text reveal on section heading
-  const titleRef = useTextReveal({ splitBy: 'words', stagger: 0.06, from: 'bottom' });
-
-  // Stagger-slide-left for experience cards — creates a cascading left-to-right entrance
+  // Container-level stagger animation — single ScrollTrigger for all experience cards
   const experienceContainerRef = useGsapReveal({
-    animation: 'stagger-slide-left',
-    stagger: 0.12,
-    duration: 0.7,
+    animation: 'stagger-children',
+    stagger: 0.1,
+    duration: 0.6,
     scrollTriggerOptions: { start: 'top 88%' }
   });
 
-  // Stagger-scale for education cards — bouncy scale entrance
+  // Container-level stagger animation — single ScrollTrigger for all education cards
   const educationContainerRef = useGsapReveal({
-    animation: 'stagger-scale',
-    stagger: 0.12,
-    duration: 0.7,
+    animation: 'stagger-children',
+    stagger: 0.1,
+    duration: 0.6,
     scrollTriggerOptions: { start: 'top 88%' }
   });
-
-  // Blur-in for the resume button
-  const resumeRef = useGsapReveal({ animation: 'blur-in', duration: 0.7 });
 
   const TimelineCard = ({ item }) => (
-    <div className="bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-800/20 hover:border-gray-400">
+    <div className="bg-gray-800/50 rounded-xl p-5 border-l-4 border-gray-500 hover:bg-gray-800/70 transition-colors duration-300">
       <div className="flex items-start gap-3">
         <div className={`w-3 h-3 rounded-full mt-1.5 flex-shrink-0 ${item.type === 'work' ? 'bg-gray-400' : 'bg-gray-500'}`} />
         <div>
@@ -87,13 +80,10 @@ const ExperienceSection = () => {
   );
 
   return (
-    <SectionWrapper id="experience" noAnimation>
-      {/* Header with word-level reveal */}
+    <SectionWrapper id="experience">
+      {/* Header */}
       <div className="text-center mb-16">
-        <h2
-          ref={titleRef}
-          className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4"
-        >
+        <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-4">
           Experience & Education
         </h2>
         <div className="w-24 sm:w-32 h-1 bg-gradient-to-r from-gray-500 to-gray-300 mx-auto rounded-full" />
@@ -101,7 +91,7 @@ const ExperienceSection = () => {
 
       <div className="timeline-container relative">
         <div className="space-y-12 max-w-3xl mx-auto">
-          {/* Experience — stagger-slide-left */}
+          {/* Experience */}
           <div className="space-y-6">
             <div className="relative">
               <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
@@ -123,7 +113,7 @@ const ExperienceSection = () => {
             </div>
           </div>
 
-          {/* Education — stagger-scale */}
+          {/* Education */}
           <div className="space-y-6">
             <div className="relative">
               <div className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm rounded-3xl border border-gray-700/50" />
@@ -148,11 +138,11 @@ const ExperienceSection = () => {
           </div>
         </div>
 
-        {/* Resume Download — blur-in */}
-        <div ref={resumeRef} className="pt-12 text-center">
+        {/* Resume Download */}
+        <div className="pt-12 text-center">
           <button
             onClick={handleDownloadResume}
-            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-600 text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black transition-all duration-300 cursor-pointer hover:scale-105 hover:shadow-xl"
+            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-2xl border-2 border-gray-600 text-gray-200 bg-gray-900/60 hover:bg-gray-100 hover:text-black transition-all duration-300 cursor-pointer"
           >
             <Download className="w-6 h-6" />
             Download Resume
