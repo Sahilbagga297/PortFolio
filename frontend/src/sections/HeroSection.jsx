@@ -9,9 +9,9 @@ const HeroSection = () => {
   const isMobile = useIsMobile();
 
   const skills = [
-    { icon: <Code className="w-6 h-6" />, label: 'Mern Stack Development', level: 'Advanced', stars: 5 },
+    { icon: <Code className="w-6 h-6" />, label: 'MERN Stack Development', level: 'Advanced', stars: 5 },
     { icon: <Palette className="w-6 h-6" />, label: 'Generative AI', level: 'Intermediate', stars: 4 },
-    { icon: <Zap className="w-6 h-6" />, label: 'Cloud Computing', level: 'Beginner', stars: 3 },
+    { icon: <Zap className="w-6 h-6" />, label: 'Cloud Computing', level: 'Advanced', stars: 5 },
     { icon: <GitBranch className="w-6 h-6" />, label: 'Open Source Contribution', level: "GSSoC '26 Contributor", stars: 4 },
   ];
 
