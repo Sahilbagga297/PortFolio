@@ -34,7 +34,6 @@ const HeroSection = () => {
     }
   };
 
-  // Scoped entrance timeline animation
   const containerRef = useGsapTimeline((tl) => {
     const isLowEndDevice =
       (typeof navigator !== 'undefined') && (
